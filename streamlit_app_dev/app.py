@@ -11,7 +11,7 @@ st.set_page_config(
 )
 
 # Title
-st.title("**DEV** US GAO Antifraud Resource Test Page")
+st.title("DEV -- US GAO Antifraud Resource Test Page")
 st.markdown("Search and explore fraud concepts, instances, and relationships in the GAO's Conceptual Fraud Model")
 
 # Sidebar for ontology management
