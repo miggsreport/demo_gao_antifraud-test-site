@@ -1,0 +1,233 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+# ============================================================================
+# PHASE 1: FOUNDATION CLASSES VALIDATION
+# ============================================================================
+# These are the core reference classes that other instances depend on.
+# Start here to ensure your foundational data is clean.
+#
+# Classes covered:
+# - FraudActivity (and subclasses)
+# - FederalAgency 
+# - FederalUnit
+# - ProgramArea
+# - FundingStream
+# - RevenueStream
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# 1.1 FraudActivity Validation
+# ----------------------------------------------------------------------------
+# FraudActivity is the parent class for all fraud types (BeneficiaryFraud, 
+# CellphoneFraud, etc.). These are heavily referenced by FederalFraudScheme
+# instances and resource instances.
+
+gfo:FraudActivityShape
+    a sh:NodeShape ;
+    sh:targetClass gfo:FraudActivity ;
+    sh:name "Fraud Activity Validation" ;
+    sh:description "Validates all FraudActivity class instances and their subclasses" ;
+    
+    # VIOLATION: Must have at least one label
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Every FraudActivity must have at least one rdfs:label" ;
+    ] ;
+    
+    # WARNING: Label should be a string (not a typed literal with language tag issues)
+    sh:property [
+        sh:path rdfs:label ;
+        sh:nodeKind sh:Literal ;
+        sh:severity sh:Warning ;
+        sh:message "FraudActivity label should be a literal value" ;
+    ] ;
+    
+    # INFO: Recommended to have a definition
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 0 ;
+        sh:severity sh:Info ;
+        sh:message "FraudActivity should ideally have a skos:definition (currently optional)" ;
+    ] ;
+    
+    # INFO: Track if prefLabel is used
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:maxCount 1 ;
+        sh:severity sh:Info ;
+        sh:message "If using skos:prefLabel, should have only one per language" ;
+    ] .
+
+# ----------------------------------------------------------------------------
+# 1.2 FederalAgency Validation
+# ----------------------------------------------------------------------------
+# Federal agencies are core entities that administer programs and are 
+# referenced throughout the ontology.
+
+gfo:FederalAgencyShape
+    a sh:NodeShape ;
+    sh:targetClass gfo:FederalAgency ;
+    sh:name "Federal Agency Validation" ;
+    sh:description "Validates Federal Agency instances" ;
+    
+    # VIOLATION: Must have a label
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Every FederalAgency must have at least one rdfs:label" ;
+    ] ;
+    
+    # WARNING: If agency has isPartOf relationship, target should exist
+    sh:property [
+        sh:path gfo:isPartOf ;
+        sh:nodeKind sh:IRI ;
+        sh:severity sh:Warning ;
+        sh:message "isPartOf relationship should point to a valid URI (another agency or unit)" ;
+    ] ;
+    
+    # WARNING: If agency has isAdministeredBy, target should be an agency
+    sh:property [
+        sh:path gfo:isAdministeredBy ;
+        sh:class gfo:FederalAgency ;
+        sh:severity sh:Warning ;
+        sh:message "isAdministeredBy should point to another FederalAgency" ;
+    ] ;
+    
+    # INFO: Track website presence
+    sh:property [
+        sh:path gfo:hasWebsite ;
+        sh:nodeKind sh:IRI ;
+        sh:severity sh:Info ;
+        sh:message "Agency website should be a valid URI if provided" ;
+    ] .
+
+# ----------------------------------------------------------------------------
+# 1.3 FederalUnit Validation
+# ----------------------------------------------------------------------------
+# Federal units are sub-organizations within agencies.
+
+gfo:FederalUnitShape
+    a sh:NodeShape ;
+    sh:targetClass gfo:FederalUnit ;
+    sh:name "Federal Unit Validation" ;
+    sh:description "Validates Federal Unit instances" ;
+    
+    # VIOLATION: Must have a label
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Every FederalUnit must have at least one rdfs:label" ;
+    ] ;
+    
+    # WARNING: Units should be part of an agency
+    sh:property [
+        sh:path gfo:isPartOf ;
+        sh:minCount 0 ;  # Not forcing this yet, just checking
+        sh:severity sh:Info ;
+        sh:message "FederalUnit should ideally have an isPartOf relationship to a parent agency" ;
+    ] .
+
+# ----------------------------------------------------------------------------
+# 1.4 ProgramArea Validation
+# ----------------------------------------------------------------------------
+# Program areas categorize federal programs and activities.
+
+gfo:ProgramAreaShape
+    a sh:NodeShape ;
+    sh:targetClass gfo:ProgramArea ;
+    sh:name "Program Area Validation" ;
+    sh:description "Validates Program Area instances" ;
+    
+    # VIOLATION: Must have a label
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Every ProgramArea must have at least one rdfs:label" ;
+    ] ;
+    
+    # INFO: Check for preferred label
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:maxCount 1 ;
+        sh:severity sh:Info ;
+        sh:message "ProgramArea can have at most one skos:prefLabel per language" ;
+    ] .
+
+# ----------------------------------------------------------------------------
+# 1.5 FundingStream Validation
+# ----------------------------------------------------------------------------
+# Funding streams represent types of federal funding.
+
+gfo:FundingStreamShape
+    a sh:NodeShape ;
+    sh:targetClass gfo:FundingStream ;
+    sh:name "Funding Stream Validation" ;
+    sh:description "Validates Funding Stream instances and subclasses" ;
+    
+    # VIOLATION: Must have a label
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Every FundingStream must have at least one rdfs:label" ;
+    ] ;
+    
+    # INFO: Check for preferred label (used in your Lambda code)
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 0 ;
+        sh:severity sh:Info ;
+        sh:message "FundingStream typically uses skos:prefLabel for display names" ;
+    ] .
+
+# ----------------------------------------------------------------------------
+# 1.6 RevenueStream Validation  
+# ----------------------------------------------------------------------------
+# Revenue streams represent types of federal revenue sources.
+
+gfo:RevenueStreamShape
+    a sh:NodeShape ;
+    sh:targetClass gfo:RevenueStream ;
+    sh:name "Revenue Stream Validation" ;
+    sh:description "Validates Revenue Stream instances and subclasses" ;
+    
+    # VIOLATION: Must have a label
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Every RevenueStream must have at least one rdfs:label" ;
+    ] ;
+    
+    # INFO: Check for preferred label
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 0 ;
+        sh:severity sh:Info ;
+        sh:message "RevenueStream typically uses skos:prefLabel for display names" ;
+    ] .
+
+# ----------------------------------------------------------------------------
+# Cross-Cutting Validation: URI Patterns
+# ----------------------------------------------------------------------------
+# This shape validates that all resources use the correct namespace.
+
+gfo:NamespaceValidationShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf rdfs:label ;
+    sh:name "Namespace Pattern Validation" ;
+    
+    # INFO: Check if instances use the correct GFO namespace
+    sh:nodeKind sh:IRI ;
+    sh:severity sh:Info ;
+    sh:message "Instance should be identified by an IRI (not a blank node)" .
