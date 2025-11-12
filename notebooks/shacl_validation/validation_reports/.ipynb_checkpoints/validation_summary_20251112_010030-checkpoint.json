@@ -1,0 +1,21 @@
+{
+  "total_issues": 216,
+  "by_severity": {
+    "Info": 216
+  },
+  "by_property": {
+    "hasWebsite": 216
+  },
+  "by_class": {
+    "AMTRAK": 1,
+    "AbilityOneCommission": 1,
+    "AdministrationforChildrenandFamilies": 1,
+    "AdministrationforCommunityLiving": 1,
+    "AdministrationforNativeAmericans": 1,
+    "AdministrativeConferenceoftheUnitedStates": 1,
+    "AdvisoryCouncilonHistoricPreservation": 1,
+    "AgencyforGlobalMedia": 1,
+    "AgencyforToxicSubstancesandDiseaseRegistry": 1,
+    "AgriculturalMarketingService": 1
+  }
+}

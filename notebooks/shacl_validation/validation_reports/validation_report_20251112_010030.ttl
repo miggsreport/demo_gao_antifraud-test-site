@@ -1,0 +1,1740 @@
+@prefix gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+[] a sh:ValidationReport ;
+    sh:conforms true ;
+    sh:result [ a sh:ValidationResult ;
+            sh:focusNode <https://www.gao.gov/ontology/gfo/OfficeOfFairHousingAndEqualOpportunity> ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.hud.gov/program_offices/fair_housing_equal_opp/aboutfheo'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalTradeCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.ftc.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AdvisoryCouncilonHistoricPreservation ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.achp.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:RBIdXA4y8UKOCIb1FB2zs3z ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.gao.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalScienceFoundation ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.nsf.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:CorporationForPublicBroadcastingOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://cpboig.oversight.gov/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USAgencyForInternationalDevelopmentOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.usaid.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalMediationAndConciliationService ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fmcs.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FarmCreditAdministrationOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.fca.gov/about/inspector-general'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfTransportationOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.oig.dot.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:PandemicResponseAccountabilityCommittee ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.pandemicoversight.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalEndowmentForTheArts ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.arts.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AmeriCorps ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://americorps.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:PensionBenefitGuarantyCorporationOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.pbgc.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AdministrationforCommunityLiving ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://acl.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:RBAlaNuGCVBEJDl5qsgPBBJ ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.ahrq.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:CybersecurityAndInfrastructureSecurityAgency ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.cisa.gov/about-cisa'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfEducationOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.ed.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:OccupationalSafetyAndHealthAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.osha.gov/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:SpecialInspectorGeneralForPandemicRecovery ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.sigpr.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfAgricultureOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://usdaoig.oversight.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalArchivesandRecordsAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.archives.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode <https://www.gao.gov/ontology/gfo/FinancialStabilityOversightCouncil> ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://home.treasury.gov/policy-issues/financial-markets-financial-institutions-and-fiscal-service/fsoc'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USCommodityFuturesTradingCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.cftc.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalLaborRelationsAuthority ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.flra.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AppalachianRegionalCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.arc.gov/index.asp" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfCommerceOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.oig.doc.gov/Pages/default.aspx" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalEndowmentForTheHumanities ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.neh.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:SecuritiesandExchangeCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.sec.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalHousingAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://fha.gov/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfHousingAndUrbanDevelopmentOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.hudoig.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USNavy ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.navy.mil" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:ArcticResearchCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.arctic.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:RBBZNKZlECaLuYaAqywdiYM ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.uscourts.gov/topics/administrative-office-us-courts" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalMediationBoard ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://nmb.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfHealthAndHumanServicesOfficeOfInspectorGeneral ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.hhs.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalCapitalPlanningCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.ncpc.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalTransportationSafetyBoard ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.ntsb.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalReserveBoard ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.federalreserve.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AgriculturalResearchService ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.ars.usda.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:UnUSAgencyforInternationalDevelopment ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "http://www.usaid.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfTheTreasuryOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.treasury.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:LibraryOfCongressOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.loc.gov/about/office-of-the-inspector-general/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:U.S._Fish_and_Wildlife_Service ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fws.gov/endangered/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:TransportationSecurityAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "http://www.tsa.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentofHealthandHumanServices ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.hhs.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:GeneralServicesAdministrationOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.gsaig.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:VeteransBenefitAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://benefits.va.gov/benefits/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:OfficeOfTheInspectorGeneralOfTheIntelligenceCommunity ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.dni.gov/index.php/who-we-are/organizations/icig/icig-who-we-are" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalMaritimeCommissionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fmc.gov/about-the-fmc/bureaus-offices/office-of-inspector-general/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalBureauofInvestigation ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "http://www.fbi.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfDefenseOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.dodig.mil/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentofJustice ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.justice.gov/about'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalElectionCommissionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fec.gov/office-inspector-general/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalCreditUnionAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.ncua.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USTradeAndDevelopmentAgency ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "http://www.ustda.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:VAHomeLoanProgram ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.benefits.va.gov/homeloans/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfJusticeOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.justice.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FoodandDrugAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fda.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:BureauofIndianAffairs ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.bia.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:CommissionOnCivilRights ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.usccr.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:TennesseeValleyAuthorityOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.tva.gov/index.html" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalPark_Service ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.nps.gov/index.htm" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USMarineCorps ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "http://www.usmc.mil/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:RiskManagementAgency ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.rma.usda.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:OfficeOfTheDirectorOfNationalIntelligence ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.dni.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:CouncilOfInspectorsGeneralOnFinancialOversight ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.treasury.gov/about/organizational-structure/ig/Pages/Council-of-Insp..." ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AbilityOneCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.abilityone.gov/index.html'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:SmallBusinessAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.sba.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentofTransportation ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.transportation.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:PostalRegulatoryCommissionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.prc.gov/oig" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalSecurityAgencyOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.nsa.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:BureauofAlcoholTobaccoFirearmsandExplosives ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.atf.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalInstituteOfScienceAndTechnology ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.nist.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentofVeteransAffairs ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "http://www.va.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:EqualEmploymentOpportunityCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.eeoc.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfLaborOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.oig.dol.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:EnvironmentalProtectionAgencyOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.epaoig.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DefenseHealthAgency ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.health.mil/About-MHS/OASDHA/Defense-Health-Agency" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AgencyforToxicSubstancesandDiseaseRegistry ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.atsdr.cdc.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentofCommerce ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.commerce.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:CentersforDiseaseControlandPrevention ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.cdc.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:OfficeOfSpecialCounsel ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://osc.gov/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:ArchitectOfTheCapitolOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://aocoig.oversight.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalAeronauticsAndSpaceAdministrationOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.nasa.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:MeritSystemsProtectionBoard ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.mspb.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalInstituteForOccupationalSafetyAndHealth ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.cdc.gov/niosh/index.htm"^^xsd:anyURI ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:OfficeOfTheAssistantSecretaryOfDefenseForHealthAffairs ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.health.mil/About-MHS/OASDHA'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:OverseasPrivateInvestmentCorporation ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.dfc.gov/who-we-are" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:Bureau_of_Safety_and_Environmental_Enforcement ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.bsee.gov/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:CorporationForNationalCommunityServiceOfficeOfInspectorGeneral ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.americorpsoig.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:RailroadRetirementBoardOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.rrb.gov/OurAgency/InspectorGeneral" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:InternationalTradeCommissionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.usitc.gov/oig/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalEmergencyManagementAgency ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fema.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:MedicarePaymentAdvisoryCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.medpac.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AnimalandPlantHealthInspectionService ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.aphis.usda.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:National_Security_Agency ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.nsa.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentofEducation ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.ed.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:ConsumerFinancialProtectionBureau ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.consumerfinance.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:UnitedStatesAccessBoard ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.access-board.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USPostalServiceOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.uspsoig.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalHousingFinanceAgencyOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.fhfaoig.gov/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalGeospatial-IntelligenceAgencyOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.nga.mil/resources/oig/Office_of_the_Inspector_General.html" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalEndowmentForTheArtsOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.arts.gov/about/inspector-general" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:PensionBenefitGuarantyCorporation ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.pbgc.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:OfficeOfPersonnelManagementOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.opm.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:U.S._International_Trade_Commission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.usitc.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AppalachianRegionalCommissionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.arc.gov/office-of-inspector-general/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:SecuritiesAndExchangeCommissionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.sec.gov/oig" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AdministrationforChildrenandFamilies ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.acf.hhs.gov/about'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:VeteransEmploymentAndTrainingService ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.dol.gov/agencies/vets" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalReconnaissanceOfficeOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.nro.gov/nro-ig/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalEnergyRegulatoryCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.ferc.gov/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USCensusBureau ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "http://www.census.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalRetirementThriftInvestmentBoard ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.frtib.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:BureauofLandManagement ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.blm.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalLaborRelationsAuthorityOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.flra.gov/components-offices/offices/office-inspector-general" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfStateOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.stateoig.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:OccupationalSafetyAndHealthReviewCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.oshrc.gov/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:SpecialInspectorGeneralForTheTroubledAssetReliefProgram ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.sigtarp.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:LegalServicesCorporationOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.oig.lsc.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentofState ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.state.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:PrivacyAndCivilLibertiesOversightBoard ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.pclob.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentofEnergy ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.energy.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DenaliCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.denali.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:United_States_Geological_Survey ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.usgs.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalDepositInsuranceCorporation ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fdic.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:Inter-AmericanFoundation ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.iaf.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AgencyforGlobalMedia ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.usagm.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalCreditUnionAdministrationOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://ncua.gov/about/inspector-general" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:SocialSecurityAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.ssa.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:InstituteOfMuseumAndLibraryServices ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.imls.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalLaborRelationsBoard ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.nlrb.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentofLabor ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.dol.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:CouncilOfTheInspectorsGeneralOnIntegrityAndEfficiency ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.ignet.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AgriculturalMarketingService ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.ams.usda.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FBIInternetComplaintCenter ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.ic3.gov/default.aspx'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:InternalRevenueSystem ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.irs.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:VeteransHealthAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "http://www.va.gov/health" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USImmigrationAndCustomsEnforcement ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.ice.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NuclearRegulatoryCommissionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.nrc.gov/insp-gen.html'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NuclearRegulatoryCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.nrc.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalReserveBoardConsumerFinancialProtectionBureauOfficeOfInspectorGeneral ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.federalreserve.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:SurfaceTransportationBoard ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://prod.stb.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AdministrationforNativeAmericans ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.acf.hhs.gov/ana" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:SmallBusinessAdministrationOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.sba.gov/about-sba/oversight-advocacy/office-inspector-general" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:OfficeOfPersonnelManagement ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.opm.gov/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:JamesMadisonMemorialFellowshipFoundation ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.jamesmadison.gov/foundation-information/about" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentofAgriculture ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.usda.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AMTRAK ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "http://www.amtrak.com" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:UnitedStatesCoastGuard ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.uscg.mil" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalAviationAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.faa.gov/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalHighwayTransportationSafetyAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.nhtsa.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USAirForce ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.af.mil" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentoftheInterior ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "http://www.doi.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USDevelopmentFinanceCorporationOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.dfc.gov/oig" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:ConsumerProductSafetyCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.cpsc.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FoodandNutritionService ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fns.usda.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USSecretService ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.secretservice.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:MineSafetyAndHealthAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.msha.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:Department_of_the_Treasury ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://home.treasury.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:U.S._Marshal_Service ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.usmarshals.gov/index.html" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:CentralIntelligenceAgencyOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.cia.gov/about/organization/inspector-general/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:MilleniumChallengeCorporation ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.mcc.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfHomelandSecurityOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.oig.dhs.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:PeaceCorps ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.peacecorps.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:ConsumerProductSafetyCommissionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.cpsc.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalEndowmentForTheHumanitiesOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.neh.gov/about/oig" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:ElectionAssistanceCommissionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.eac.gov/inspector-general" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:GeneralServicesAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "http://www.gsa.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:SmithsonianInstitutionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.si.edu/oig" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:OfficeOfGovernmentEthics ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.oge.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalCommunicationsCommissionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fcc.gov/inspector-general" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DrugEnforcementAgency ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "http://www.justice.gov/dea/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:EqualEmploymentOpportunityCommissionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.eeoc.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AdministrativeConferenceoftheUnitedStates ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.acus.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:SelectiveServiceSystem ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.sss.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:U.S._Space_Force ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.spaceforce.mil/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:SocialSecurityAdministrationOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://oig.ssa.gov/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalScienceFoundationOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.nsf.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DenaliCommissionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.denali.gov/office-of-inspector-general/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:CommodityFuturesTradingCommissionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.cftc.gov/About/OfficeoftheInspectorGeneral/index.htm'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:CentralIntelligenceAgency ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.cia.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USPostalService ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.usps.com" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfVeteransAffairsOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.vaoig.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalMineSafetyAndHealthReviewCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fmshrc.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalMaritimeCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fmc.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfTheInteriorOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.doioig.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:UnitedStatesSentencingCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.ussc.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NaturalResourcesConservationService ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.nrcs.usda.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DefenseIntelligenceAgencyOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://oig.dia.mil/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:TreasuryInspectorGeneralForTaxAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.treasury.gov/tigta/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalTradeCommissionOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.ftc.gov/office-inspector-general" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalTransitAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.transit.dot.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalAeronauticsandSpaceAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'https://www.nasa.gov/'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalDepositInsuranceCorporationOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fdicoig.gov/about-us" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:Export-ImportBankOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.exim.gov/about/oig" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FarmCreditAdministration ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fca.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentofDefense ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.defense.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USCitizenshipAndImmigrationService ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.uscis.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentofHousingandUrbanDevelopment ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.hud.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalArchivesAndRecordsAdministrationOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://naraoig.oversight.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:PeaceCorpsOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.peacecorps.gov/about/inspector-general/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:electionAssistanceCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.eac.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:CentersforMedicareandMedicaidServices ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "http://www.cms.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:AmtrackOfficeOfInspectorGeneral ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "'AMTRAK Office Of Inspector General | Independence. Objectivity. Oversight. (amtrakoig.gov)'" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:GovernmentPublishingOfficeOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.gpo.gov/who-we-are/our-agency/inspector-general/overview" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USArmy ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.army.mil/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:NationalLaborRelationsBoardOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.nlrb.gov/about-nlrb/who-we-are/inspector-general" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:Export-ImportBankOfTheUnitedStates ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.exim.gov/" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:GovernmentAccountabilityOfficeOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.gao.gov/ig" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalElectionCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fec.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:FederalCommunicationsCommission ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.fcc.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:USAfricanDevelopmentFoundation ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.usadf.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentofHomelandSecurity ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.dhs.gov" ],
+        [ a sh:ValidationResult ;
+            sh:focusNode gfo:DepartmentOfEnergyOIG ;
+            sh:resultMessage "Agency website should be a valid URI if provided" ;
+            sh:resultPath gfo:hasWebsite ;
+            sh:resultSeverity sh:Info ;
+            sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+            sh:sourceShape _:n7e665232daa54cf38cecf4237944a823b8 ;
+            sh:value "https://www.energy.gov/ig/office-inspector-general" ] .
+
+_:n7e665232daa54cf38cecf4237944a823b8 sh:message "Agency website should be a valid URI if provided" ;
+    sh:nodeKind sh:IRI ;
+    sh:path gfo:hasWebsite ;
+    sh:severity sh:Info .
+
