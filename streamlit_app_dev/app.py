@@ -104,7 +104,7 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
 SELECT DISTINCT ?fraudClass ?label
 WHERE {
-    ?fraudClass rdfs:subClassOf* gfo:FraudActivity .
+    ?fraudClass rdfs:subClassOf gfo:FraudActivity .
     ?fraudClass rdfs:label ?label .
     ?fraudClass a owl:Class .
     
