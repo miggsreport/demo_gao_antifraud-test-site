@@ -423,7 +423,7 @@ def main():
     print("=" * 80)
     
     # Configuration
-    GFO_ONTOLOGY_PATH = "gfo_turtle.ttl"  # Adjust path as needed
+    C:\Projects\gao-ontology\ontology_taxonomy_mapping\pp_scheme_maingaoproducttaxonomy_gaoproducttaxonomy.ttl = "gfo_turtle.ttl"  # Adjust path as needed
     TAXONOMY_PATH = "/mnt/user-data/uploads/1761595961204_pasted-content-1761595961204.txt"  # The uploaded taxonomy
     OUTPUT_DIR = Path("/mnt/user-data/outputs")
     OUTPUT_DIR.mkdir(exist_ok=True)

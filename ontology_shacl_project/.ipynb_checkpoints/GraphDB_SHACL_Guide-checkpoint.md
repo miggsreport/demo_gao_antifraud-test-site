@@ -21,7 +21,7 @@ GraphDB has built-in SHACL validation support. This guide shows you how to valid
 2. Click **Upload RDF files**
 3. Select your `phase1_foundation_shapes.ttl` file
 4. **Important Settings:**
-   - Named graph: Leave blank or use `http://example.org/shapes` (optional)   !!! Must load into named graph where GraphDB looks for shacl: <http://rdf4j.org/schema/rdf4j#SHACLShapeGraph>
+   - Named graph: Leave blank or use `http://example.org/shapes` (optional)
    - Base URI: Can leave default
    - Context: Default is fine
 5. Click **Import**

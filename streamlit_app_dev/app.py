@@ -6,12 +6,12 @@ import os
 
 # Set page config
 st.set_page_config(
-    page_title="DEV -- US GAO Antifraud Resource Test Page",
+    page_title="US GAO Antifraud Resource Test Page",
     layout="wide"
 )
 
 # Title
-st.title("DEV -- US GAO Antifraud Resource Test Page")
+st.title("**DEV** US GAO Antifraud Resource Test Page")
 st.markdown("Search and explore fraud concepts, instances, and relationships in the GAO's Conceptual Fraud Model")
 
 # Sidebar for ontology management
@@ -93,44 +93,51 @@ if st.session_state.ontology:
     st.header("Fraud Activity Search")
     st.markdown("Search for all resources related to specific fraud activities.")
     
-    fraud_activity_mapping = {
-        "Beneficiary fraud": "BeneficiaryFraud",
-        "Cellphone fraud": "CellphoneFraud",
-        "Charity fraud": "CharityFraud",
-        "Confidence fraud": "ConfidenceFraud",
-        "Consumer fraud": "ConsumerFraud",
-        "Corporate fraud": "CorporateFraud",
-        "Corruption": "Corruption",
-        "Cyber espionage": "CyberEspionage",
-        "Cyberextortion": "Cyberextortion",
-        "Environmental fraud": "EnvironmentalFraud",
-        "Federal contract fraud": "ContractFraud",
-        "Financial institution fraud": "FinancialInstitutionFraud",
-        "Government furnished equipment fraud": "GovernmentFurnishedEquipmentFraud",
-        "Grant fraud": "GrantFraud",
-        "Healthcare fraud": "HealthcareFraud",
-        "Housing fraud": "HousingFraud",
-        "Identity fraud": "IdentityFraud",
-        "Insurance fraud": "InsuranceFraud",
-        "Investment fraud": "InvestmentFraud",
-        "Laboratory fraud": "LaboratoryFraud",
-        "Lien filing fraud": "LienFillingFraud",
-        "Loan fraud": "LoanFraud",
-        "Mail fraud": "MailFraud",
-        "Media manipulation": "MediaManipulation",
-        "Payment fraud": "PaymentFraud",
-        "Procurement fraud": "ProcurementFraud",
-        "Public assistance fraud": "AssistanceFraud",
-        "Public emergency fraud": "public_emergency_fraud",
-        "Sanction evasion fraud": "SanctionEvasion",
-        "Student financial aid fraud": "StudentFinancialAidFraud",
-        "Supervised release": "supervised_release",
-        "Tax fraud": "TaxFraud",
-        "Trafficking": "Trafficking",
-        "Visa fraud": "VisaFraud",
-        "Wire fraud": "WireFraud",
-        "Workplace fraud": "WorkplaceFraud"
-    }
+    # Dynamically query for fraud activities from the ontology
+    @st.cache_data
+    def get_fraud_activities():
+        """Query the ontology for all FraudActivity subclasses and their labels"""
+        fraud_activities_query = """
+PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT DISTINCT ?fraudClass ?label
+WHERE {
+    ?fraudClass rdfs:subClassOf* gfo:FraudActivity .
+    ?fraudClass rdfs:label ?label .
+    ?fraudClass a owl:Class .
+    
+    # Exclude the parent FraudActivity class itself
+    FILTER(?fraudClass != gfo:FraudActivity)
+}
+ORDER BY ?label
+"""
+        try:
+            g = rdflib.Graph()
+            if 'uploaded_file_path' in st.session_state:
+                g.parse(st.session_state.uploaded_file_path)
+                results = list(g.query(fraud_activities_query))
+                
+                # Build mapping of label -> class name
+                mapping = {}
+                for row in results:
+                    class_uri = str(row.fraudClass)
+                    class_name = class_uri.split('/')[-1]  # Extract class name from URI
+                    label = str(row.label)
+                    mapping[label] = class_name
+                
+                return mapping
+        except Exception as e:
+            st.error(f"Error loading fraud activities: {str(e)}")
+            return {}
+    
+    # Get fraud activities dynamically
+    fraud_activity_mapping = get_fraud_activities()
+    
+    if not fraud_activity_mapping:
+        st.warning("No fraud activities found in ontology. Please check that the ontology is properly loaded.")
+        fraud_activity_mapping = {}
     
     fraud_activity_label = st.selectbox(
         "Select Fraud Activity Type:",
@@ -181,7 +188,7 @@ WHERE {{
     
     FILTER(?fraudType != gfo:FraudActivity)
 }}
-ORDER BY ?individualName
+ORDER BY LCASE(STR(?individualName))
 """
 
             # Query for Fraud Awareness Resources (FraudEducation)
@@ -215,7 +222,7 @@ WHERE {{
         FILTER(?resourceClass != gfo:FraudEducation)
     }}
 }}
-ORDER BY ?individualName
+ORDER BY LCASE(STR(?individualName))
 """
 
             # Query for Fraud Prevention & Detection Guidance
@@ -249,7 +256,7 @@ WHERE {{
         FILTER(?resourceClass != gfo:FraudPreventionAndDetectionGuidance)
     }}
 }}
-ORDER BY ?individualName
+ORDER BY LCASE(STR(?individualName))
 """
 
             # Query for Fraud Risk Management Principles
@@ -283,7 +290,7 @@ WHERE {{
         FILTER(?resourceClass != gfo:FraudRiskManagementPrinciples)
     }}
 }}
-ORDER BY ?individualName
+ORDER BY LCASE(STR(?individualName))
 """
 
             # Query for GAO Reports
@@ -317,7 +324,7 @@ WHERE {{
         FILTER(?resourceClass != gfo:GAOReport)
     }}
 }}
-ORDER BY ?individualName
+ORDER BY LCASE(STR(?individualName))
 """
             
             try:
