@@ -163,7 +163,7 @@ if st.session_state.ontology is None:
 # Main interface
 if st.session_state.ontology:
     
-    st.markdown('<p class="section-header">Fraud Activity Search</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-header">Fraud type</p>', unsafe_allow_html=True)
     
     fraud_activity_mapping = st.session_state.fraud_activity_mapping
     
@@ -172,7 +172,7 @@ if st.session_state.ontology:
         fraud_activity_mapping = {}
     
     fraud_activity_label = st.selectbox(
-        "Select Fraud Activity Type:",
+        "What type of fraud do you want to combat?",
         options=list(fraud_activity_mapping.keys()),
         help="Choose a fraud activity type to find all related resources"
     )
@@ -517,7 +517,7 @@ else:
     st.markdown("""
     **What this interface provides:**
     
-    1. **Fraud Activity Search**: Find all types of resources related to specific fraud activities
+    1. **Fraud type**: Find all types of resources related to specific fraud activities
        - Fraud Scheme Examples
        - Fraud Awareness Resources
        - Fraud Prevention & Detection Guidance
