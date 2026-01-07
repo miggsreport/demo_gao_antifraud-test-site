@@ -13,13 +13,12 @@ st.set_page_config(
 # Add custom CSS for styling
 st.markdown("""
 <style>
-    /* Light yellow background for the header area - reduced padding */
+    /* Light yellow background for the header area */
     .dev-header {
         background-color: #FFFACD;
         padding: 10px 15px;
         border-radius: 8px;
         margin-bottom: 15px;
-        margin-top: -20px;
         border: 2px solid #FFD700;
     }
     .dev-header h1 {
@@ -33,9 +32,11 @@ st.markdown("""
         font-size: 0.95rem;
     }
     
-    /* Reduce space between elements */
-    .block-container {
-        padding-top: 1rem;
+    /* Smaller section header */
+    .section-header {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 10px;
     }
     
     /* Tab styling - larger font and borders */
@@ -61,7 +62,7 @@ st.markdown("""
         border-bottom-color: #fff;
     }
     
-    /* Reduce spacing around success message and tabs */
+    /* Reduce spacing around success message */
     .stSuccess {
         margin-bottom: 8px;
     }
@@ -69,16 +70,6 @@ st.markdown("""
     /* Uniform spacing for expanders */
     .streamlit-expanderHeader {
         font-size: 1rem;
-    }
-    
-    /* Reduce default margins */
-    .stMarkdown {
-        margin-bottom: 0;
-    }
-    
-    /* Consistent spacing for horizontal rules */
-    hr {
-        margin: 10px 0;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -91,14 +82,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar for ontology management - using expander that starts collapsed
-with st.sidebar.expander("Ontology Management", expanded=False):
-    uploaded_file = st.file_uploader(
-        "Upload Ontology File", 
-        type=['owl', 'rdf', 'ttl', 'n3', 'jsonld'],
-        help="Upload your ontology file to begin searching"
-    )
-
 # Initialize session state
 if 'ontology' not in st.session_state:
     st.session_state.ontology = None
@@ -106,8 +89,6 @@ if 'loaded_file' not in st.session_state:
     st.session_state.loaded_file = None
 if 'fraud_activity_mapping' not in st.session_state:
     st.session_state.fraud_activity_mapping = {}
-if 'uploaded_file_widget' not in st.session_state:
-    st.session_state.uploaded_file_widget = None
 
 @st.cache_resource
 def load_ontology_rdflib(file_path):
@@ -165,49 +146,25 @@ def load_default_ontology():
     
     if default_ontology_path.exists():
         try:
-            with st.spinner("Loading GFO ontology..."):
-                st.session_state.ontology = load_ontology_rdflib(str(default_ontology_path))
-                st.session_state.loaded_file = "gfo_turtle.ttl (default)"
-                st.session_state.uploaded_file_path = str(default_ontology_path)
-                
-                if st.session_state.ontology:
-                    triple_count = len(st.session_state.ontology)
-                    st.sidebar.success(f"Auto-loaded: gfo_turtle.ttl ({triple_count} triples)")
-                    
-                    st.session_state.fraud_activity_mapping = load_fraud_activities(st.session_state.ontology)
-                    st.sidebar.info(f"Fraud Activities: {len(st.session_state.fraud_activity_mapping)}")
-                    return True
+            st.session_state.ontology = load_ontology_rdflib(str(default_ontology_path))
+            st.session_state.loaded_file = "gfo_turtle.ttl (default)"
+            st.session_state.uploaded_file_path = str(default_ontology_path)
+            
+            if st.session_state.ontology:
+                st.session_state.fraud_activity_mapping = load_fraud_activities(st.session_state.ontology)
+                return True
         except Exception as e:
-            st.sidebar.error(f"Failed to load: {str(e)}")
-    else:
-        st.sidebar.warning("Default ontology not found")
+            pass
     return False
 
 # Auto-load default ontology
 if st.session_state.ontology is None:
     load_default_ontology()
 
-# Handle file upload
-if uploaded_file is not None and uploaded_file != st.session_state.loaded_file:
-    temp_path = f"/tmp/{uploaded_file.name}"
-    with open(temp_path, "wb") as f:
-        f.write(uploaded_file.getbuffer())
-    
-    st.session_state.ontology = load_ontology_rdflib(temp_path)
-    st.session_state.loaded_file = uploaded_file
-    st.session_state.uploaded_file_path = temp_path
-    
-    if st.session_state.ontology:
-        triple_count = len(st.session_state.ontology)
-        st.sidebar.success(f"Loaded: {uploaded_file.name} ({triple_count} triples)")
-        
-        st.session_state.fraud_activity_mapping = load_fraud_activities(st.session_state.ontology)
-        st.sidebar.info(f"Fraud Activities: {len(st.session_state.fraud_activity_mapping)}")
-
 # Main interface
 if st.session_state.ontology:
     
-    st.header("Fraud Activity Search")
+    st.markdown('<p class="section-header">Fraud Activity Search</p>', unsafe_allow_html=True)
     
     fraud_activity_mapping = st.session_state.fraud_activity_mapping
     
@@ -526,6 +483,33 @@ ORDER BY LCASE(STR(?individualName))
                 st.info("Make sure your ontology file is properly loaded.")
         else:
             st.warning("Please select a fraud activity type.")
+    
+    # Ontology Management at bottom of page
+    st.markdown("---")
+    with st.expander("Ontology Management", expanded=False):
+        if st.session_state.ontology:
+            triple_count = len(st.session_state.ontology)
+            st.success(f"Loaded: {st.session_state.loaded_file} ({triple_count} triples)")
+            st.info(f"Fraud Activities: {len(st.session_state.fraud_activity_mapping)}")
+        
+        uploaded_file = st.file_uploader(
+            "Upload a different ontology file", 
+            type=['owl', 'rdf', 'ttl', 'n3', 'jsonld'],
+            help="Upload your ontology file to replace the current one"
+        )
+        
+        if uploaded_file is not None and uploaded_file != st.session_state.loaded_file:
+            temp_path = f"/tmp/{uploaded_file.name}"
+            with open(temp_path, "wb") as f:
+                f.write(uploaded_file.getbuffer())
+            
+            st.session_state.ontology = load_ontology_rdflib(temp_path)
+            st.session_state.loaded_file = uploaded_file
+            st.session_state.uploaded_file_path = temp_path
+            
+            if st.session_state.ontology:
+                st.session_state.fraud_activity_mapping = load_fraud_activities(st.session_state.ontology)
+                st.rerun()
 
 else:
     st.info("Please upload an ontology file to begin")
@@ -542,9 +526,25 @@ else:
        - GAO Reports
     
     **Supported formats**: OWL, RDF, TTL, N3, JSON-LD
-    
-    **Next steps**:
-    - Upload your ontology file using the sidebar
-    - Select a fraud activity type
-    - Click "Search All Resources" to find all related content
     """)
+    
+    # File uploader when no ontology loaded
+    st.markdown("---")
+    uploaded_file = st.file_uploader(
+        "Upload Ontology File", 
+        type=['owl', 'rdf', 'ttl', 'n3', 'jsonld'],
+        help="Upload your ontology file to begin searching"
+    )
+    
+    if uploaded_file is not None:
+        temp_path = f"/tmp/{uploaded_file.name}"
+        with open(temp_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
+        
+        st.session_state.ontology = load_ontology_rdflib(temp_path)
+        st.session_state.loaded_file = uploaded_file
+        st.session_state.uploaded_file_path = temp_path
+        
+        if st.session_state.ontology:
+            st.session_state.fraud_activity_mapping = load_fraud_activities(st.session_state.ontology)
+            st.rerun()
