@@ -397,35 +397,20 @@ ORDER BY LCASE(STR(?individualName))
                 if total_results > 0:
                     st.success(f"[OK] Found {total_results} total resources related to {fraud_activity_label}")
                     
-                    # Display GAO Reports section first (full width)
-                    if gao_reports:
-                        st.markdown("---")
-                        st.subheader(f"GAO Reports ({len(gao_reports)})")
-                        
-                        for i, row in enumerate(gao_reports):
-                            resource_name = str(row.individualName)
-                            definition = str(row.definition) if row.definition else "No definition available"
-                            website = str(row.website) if row.website else ""
-                            is_defined_by_url = str(row.isDefinedBy) if row.isDefinedBy else "No definition source available"
-                            
-                            with st.expander(f"{i+1}. {resource_name}"):
-                                st.write(f"**Definition:** {definition}")
-                                if website:
-                                    st.write(f"**Website:** {website}")
-                                st.write(f"**Related to:** {fraud_activity_label}")
-                                st.markdown("---")
-                                st.caption(f"Source: {is_defined_by_url}")
-                    
                     st.markdown("---")
                     
-                    # Create 2x2 grid layout for other resources
-                    col1, col2 = st.columns(2)
+                    # Create tabs for each resource type with counts in tab labels
+                    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+                        f"Fraud Scheme Examples ({len(fraud_schemes)})",
+                        f"Prevention & Detection ({len(prevention_resources)})",
+                        f"Awareness Resources ({len(awareness_resources)})",
+                        f"Risk Management ({len(risk_mgmt_resources)})",
+                        f"GAO Reports ({len(gao_reports)})"
+                    ])
                     
-                    # Top left: Fraud Scheme Examples
-                    with col1:
+                    # Tab 1: Fraud Scheme Examples
+                    with tab1:
                         if fraud_schemes:
-                            st.subheader(f"Fraud Scheme Examples ({len(fraud_schemes)})")
-                            
                             for i, result in enumerate(fraud_schemes):
                                 scheme_name = result['individualName']
                                 fraud_description = result['description'] if result['description'] else "No description available"
@@ -445,14 +430,11 @@ ORDER BY LCASE(STR(?individualName))
                                     st.markdown("---")
                                     st.caption(f"Source: {is_defined_by_url}")
                         else:
-                            st.subheader("Fraud Scheme Examples (0)")
-                            st.info("No fraud scheme examples found")
+                            st.info("No fraud scheme examples found for this fraud activity.")
                     
-                    # Top right: Fraud Prevention & Detection Guidance
-                    with col2:
+                    # Tab 2: Fraud Prevention & Detection Guidance
+                    with tab2:
                         if prevention_resources:
-                            st.subheader(f"Fraud Prevention & Detection Guidance ({len(prevention_resources)})")
-                            
                             for i, row in enumerate(prevention_resources):
                                 resource_name = str(row.individualName)
                                 definition = str(row.definition) if row.definition else "No definition available"
@@ -467,17 +449,11 @@ ORDER BY LCASE(STR(?individualName))
                                     st.markdown("---")
                                     st.caption(f"Source: {is_defined_by_url}")
                         else:
-                            st.subheader("Fraud Prevention & Detection Guidance (0)")
-                            st.info("No prevention & detection guidance found")
+                            st.info("No prevention & detection guidance found for this fraud activity.")
                     
-                    # Bottom row
-                    col3, col4 = st.columns(2)
-                    
-                    # Bottom left: Fraud Awareness Resources
-                    with col3:
+                    # Tab 3: Fraud Awareness Resources
+                    with tab3:
                         if awareness_resources:
-                            st.subheader(f"Fraud Awareness Resources ({len(awareness_resources)})")
-                            
                             for i, row in enumerate(awareness_resources):
                                 resource_name = str(row.individualName)
                                 definition = str(row.definition) if row.definition else "No definition available"
@@ -492,14 +468,11 @@ ORDER BY LCASE(STR(?individualName))
                                     st.markdown("---")
                                     st.caption(f"Source: {is_defined_by_url}")
                         else:
-                            st.subheader("Fraud Awareness Resources (0)")
-                            st.info("No fraud awareness resources found")
+                            st.info("No fraud awareness resources found for this fraud activity.")
                     
-                    # Bottom right: Fraud Risk Management Principles
-                    with col4:
+                    # Tab 4: Fraud Risk Management Principles
+                    with tab4:
                         if risk_mgmt_resources:
-                            st.subheader(f"Fraud Risk Management Principles ({len(risk_mgmt_resources)})")
-                            
                             for i, row in enumerate(risk_mgmt_resources):
                                 resource_name = str(row.individualName)
                                 definition = str(row.definition) if row.definition else "No definition available"
@@ -514,8 +487,26 @@ ORDER BY LCASE(STR(?individualName))
                                     st.markdown("---")
                                     st.caption(f"Source: {is_defined_by_url}")
                         else:
-                            st.subheader("Fraud Risk Management Principles (0)")
-                            st.info("No fraud risk management principles found")
+                            st.info("No fraud risk management principles found for this fraud activity.")
+                    
+                    # Tab 5: GAO Reports
+                    with tab5:
+                        if gao_reports:
+                            for i, row in enumerate(gao_reports):
+                                resource_name = str(row.individualName)
+                                definition = str(row.definition) if row.definition else "No definition available"
+                                website = str(row.website) if row.website else ""
+                                is_defined_by_url = str(row.isDefinedBy) if row.isDefinedBy else "No definition source available"
+                                
+                                with st.expander(f"{i+1}. {resource_name}"):
+                                    st.write(f"**Definition:** {definition}")
+                                    if website:
+                                        st.write(f"**Website:** {website}")
+                                    st.write(f"**Related to:** {fraud_activity_label}")
+                                    st.markdown("---")
+                                    st.caption(f"Source: {is_defined_by_url}")
+                        else:
+                            st.info("No GAO reports found for this fraud activity.")
                 else:
                     st.info(f"No resources found for {fraud_activity_label}")
                     
