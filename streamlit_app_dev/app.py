@@ -10,28 +10,75 @@ st.set_page_config(
     layout="wide"
 )
 
-# Add custom CSS for light yellow header area
+# Add custom CSS for styling
 st.markdown("""
 <style>
-    /* Light yellow background for the header area */
+    /* Light yellow background for the header area - reduced padding */
     .dev-header {
         background-color: #FFFACD;
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 20px;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        margin-top: -20px;
         border: 2px solid #FFD700;
     }
     .dev-header h1 {
         color: #333;
         margin: 0;
+        font-size: 1.8rem;
     }
     .dev-header p {
         color: #555;
-        margin: 5px 0 0 0;
+        margin: 3px 0 0 0;
+        font-size: 0.95rem;
     }
-    /* Yellow banner at very top */
-    .stApp > header {
-        background-color: #FFFACD;
+    
+    /* Reduce space between elements */
+    .block-container {
+        padding-top: 1rem;
+    }
+    
+    /* Tab styling - larger font and borders */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 4px;
+        margin-top: 5px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        font-size: 1.1rem;
+        font-weight: 500;
+        padding: 10px 16px;
+        border: 2px solid #ccc;
+        border-radius: 6px 6px 0 0;
+        background-color: #f8f8f8;
+    }
+    .stTabs [data-baseweb="tab"]:hover {
+        background-color: #e8e8e8;
+        border-color: #999;
+    }
+    .stTabs [aria-selected="true"] {
+        background-color: #fff;
+        border-color: #4CAF50;
+        border-bottom-color: #fff;
+    }
+    
+    /* Reduce spacing around success message and tabs */
+    .stSuccess {
+        margin-bottom: 8px;
+    }
+    
+    /* Uniform spacing for expanders */
+    .streamlit-expanderHeader {
+        font-size: 1rem;
+    }
+    
+    /* Reduce default margins */
+    .stMarkdown {
+        margin-bottom: 0;
+    }
+    
+    /* Consistent spacing for horizontal rules */
+    hr {
+        margin: 10px 0;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -44,14 +91,13 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar for ontology management
-st.sidebar.header("Ontology Management")
-
-uploaded_file = st.sidebar.file_uploader(
-    "Upload Ontology File", 
-    type=['owl', 'rdf', 'ttl', 'n3', 'jsonld'],
-    help="Upload your ontology file to begin searching"
-)
+# Sidebar for ontology management - using expander that starts collapsed
+with st.sidebar.expander("Ontology Management", expanded=False):
+    uploaded_file = st.file_uploader(
+        "Upload Ontology File", 
+        type=['owl', 'rdf', 'ttl', 'n3', 'jsonld'],
+        help="Upload your ontology file to begin searching"
+    )
 
 # Initialize session state
 if 'ontology' not in st.session_state:
@@ -60,6 +106,8 @@ if 'loaded_file' not in st.session_state:
     st.session_state.loaded_file = None
 if 'fraud_activity_mapping' not in st.session_state:
     st.session_state.fraud_activity_mapping = {}
+if 'uploaded_file_widget' not in st.session_state:
+    st.session_state.uploaded_file_widget = None
 
 @st.cache_resource
 def load_ontology_rdflib(file_path):
@@ -82,7 +130,6 @@ def load_fraud_activities(ontology_graph):
     """
     Dynamically query the ontology for direct (top-level) FraudActivity subclasses only.
     Returns a dictionary mapping display labels to class local names.
-    Note: The search query still uses transitive closure to find schemes linked to nested subclasses.
     """
     sparql_query = """
 PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
@@ -97,22 +144,15 @@ WHERE {
     try:
         results = list(ontology_graph.query(sparql_query))
         
-        # Build mapping: Display Label -> Class Local Name
         fraud_activity_mapping = {}
         for row in results:
-            # Extract local name from URI (e.g., "BeneficiaryFraud" from full URI)
             full_uri = str(row.fraudActivity)
             local_name = full_uri.split("/")[-1].split("#")[-1]
-            
-            # Get the label, capitalize first letter for display consistency
             label = str(row.fraudActivityLabel)
             display_label = label.capitalize() if label else local_name
-            
             fraud_activity_mapping[display_label] = local_name
         
-        # Sort by display label (case-insensitive)
         sorted_mapping = dict(sorted(fraud_activity_mapping.items(), key=lambda x: x[0].lower()))
-        
         return sorted_mapping
     
     except Exception as e:
@@ -132,18 +172,15 @@ def load_default_ontology():
                 
                 if st.session_state.ontology:
                     triple_count = len(st.session_state.ontology)
-                    st.sidebar.success(f"[OK] Auto-loaded: gfo_turtle.ttl")
-                    st.sidebar.info(f"Triples: {triple_count}")
+                    st.sidebar.success(f"Auto-loaded: gfo_turtle.ttl ({triple_count} triples)")
                     
-                    # Dynamically load fraud activities from ontology
                     st.session_state.fraud_activity_mapping = load_fraud_activities(st.session_state.ontology)
                     st.sidebar.info(f"Fraud Activities: {len(st.session_state.fraud_activity_mapping)}")
-                    
                     return True
         except Exception as e:
             st.sidebar.error(f"Failed to load: {str(e)}")
     else:
-        st.sidebar.warning(f"Default ontology not found")
+        st.sidebar.warning("Default ontology not found")
     return False
 
 # Auto-load default ontology
@@ -162,10 +199,8 @@ if uploaded_file is not None and uploaded_file != st.session_state.loaded_file:
     
     if st.session_state.ontology:
         triple_count = len(st.session_state.ontology)
-        st.sidebar.success(f"[OK] Loaded: {uploaded_file.name}")
-        st.sidebar.info(f"Triples: {triple_count}")
+        st.sidebar.success(f"Loaded: {uploaded_file.name} ({triple_count} triples)")
         
-        # Dynamically load fraud activities from uploaded ontology
         st.session_state.fraud_activity_mapping = load_fraud_activities(st.session_state.ontology)
         st.sidebar.info(f"Fraud Activities: {len(st.session_state.fraud_activity_mapping)}")
 
@@ -173,9 +208,7 @@ if uploaded_file is not None and uploaded_file != st.session_state.loaded_file:
 if st.session_state.ontology:
     
     st.header("Fraud Activity Search")
-    st.markdown("Search for all resources related to specific fraud activities.")
     
-    # Get the dynamically loaded fraud activity mapping
     fraud_activity_mapping = st.session_state.fraud_activity_mapping
     
     if not fraud_activity_mapping:
@@ -193,8 +226,6 @@ if st.session_state.ontology:
     if st.button("Search All Resources"):
         if fraud_activity_label and fraud_activity:
             
-            # Dynamic query capturing ALL object properties linking to the FraudActivity
-            # (mirrors live site approach)
             fraud_scheme_query = f"""
 PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -206,25 +237,20 @@ WHERE {{
     ?individual a gfo:FederalFraudScheme ;
                 rdfs:label ?individualName .
     
-    # Get additional properties
     OPTIONAL {{ ?individual dc:description ?description . }}
     OPTIONAL {{ ?individual gfo:fraudNarrative ?fraudNarrative . }}
     OPTIONAL {{ ?individual rdfs:isDefinedBy ?isDefinedBy . }}
     
-    # Get any restriction with any object property
     ?individual a ?restrictionClass .
     ?restrictionClass owl:onProperty ?objectProperty ;
                       owl:someValuesFrom ?relatedClass .
     
-    # Follow hierarchy to the selected FraudActivity
     ?relatedClass rdfs:subClassOf* gfo:{fraud_activity} .
     
-    # Extract local name from property URI for readable display
     BIND(REPLACE(STR(?objectProperty), "^.*/", "") AS ?objectPropertyName)
 }}
 """
 
-            # Query for Fraud Awareness Resources (FraudEducation)
             awareness_query = f"""
 PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -258,7 +284,6 @@ WHERE {{
 ORDER BY LCASE(STR(?individualName))
 """
 
-            # Query for Fraud Prevention & Detection Guidance
             prevention_query = f"""
 PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -292,7 +317,6 @@ WHERE {{
 ORDER BY LCASE(STR(?individualName))
 """
 
-            # Query for Fraud Risk Management Principles
             risk_mgmt_query = f"""
 PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -326,7 +350,6 @@ WHERE {{
 ORDER BY LCASE(STR(?individualName))
 """
 
-            # Query for GAO Reports
             gao_report_query = f"""
 PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -361,14 +384,13 @@ ORDER BY LCASE(STR(?individualName))
 """
             
             try:
-                # Execute queries on the already-loaded ontology graph
                 fraud_scheme_results = list(st.session_state.ontology.query(fraud_scheme_query))
                 awareness_resources = list(st.session_state.ontology.query(awareness_query))
                 prevention_resources = list(st.session_state.ontology.query(prevention_query))
                 risk_mgmt_resources = list(st.session_state.ontology.query(risk_mgmt_query))
                 gao_reports = list(st.session_state.ontology.query(gao_report_query))
                 
-                # Deduplicate and collect all properties per scheme (mirrors live site logic)
+                # Deduplicate fraud schemes
                 seen_individuals = {}
                 for row in fraud_scheme_results:
                     individual_uri = str(row.individual)
@@ -383,23 +405,18 @@ ORDER BY LCASE(STR(?individualName))
                             'isDefinedBy': str(row.isDefinedBy) if row.isDefinedBy else None,
                             'objectProperties': set()
                         }
-                    # Add the property to the set (handles duplicates automatically)
                     seen_individuals[individual_uri]['objectProperties'].add(property_name)
                 
-                # Sort alphabetically by individualName
                 fraud_schemes = sorted(seen_individuals.values(), key=lambda x: x['individualName'].lower())
                 
-                # Calculate total results
                 total_results = (len(fraud_schemes) + len(awareness_resources) + 
                                len(prevention_resources) + len(risk_mgmt_resources) + 
                                len(gao_reports))
                 
                 if total_results > 0:
-                    st.success(f"[OK] Found {total_results} total resources related to {fraud_activity_label}")
+                    st.success(f"Found {total_results} total resources related to {fraud_activity_label}")
                     
-                    st.markdown("---")
-                    
-                    # Create tabs for each resource type with counts in tab labels
+                    # Create tabs with counts
                     tab1, tab2, tab3, tab4, tab5 = st.tabs([
                         f"Fraud Scheme Examples ({len(fraud_schemes)})",
                         f"Prevention & Detection ({len(prevention_resources)})",
@@ -417,7 +434,6 @@ ORDER BY LCASE(STR(?individualName))
                                 fraud_narrative_uri = result['fraudNarrative'] if result['fraudNarrative'] else "No fraud narrative available"
                                 is_defined_by_url = result['isDefinedBy'] if result['isDefinedBy'] else "No definition source available"
                                 
-                                # Format object properties for display
                                 properties_list = sorted(result['objectProperties'])
                                 properties_display = ", ".join(properties_list)
                                 
@@ -427,12 +443,11 @@ ORDER BY LCASE(STR(?individualName))
                                     st.text(fraud_narrative_uri)
                                     st.write(f"**Related to:** {fraud_activity_label}")
                                     st.write(f"**Linked via:** {properties_display}")
-                                    st.markdown("---")
                                     st.caption(f"Source: {is_defined_by_url}")
                         else:
                             st.info("No fraud scheme examples found for this fraud activity.")
                     
-                    # Tab 2: Fraud Prevention & Detection Guidance
+                    # Tab 2: Prevention & Detection Guidance
                     with tab2:
                         if prevention_resources:
                             for i, row in enumerate(prevention_resources):
@@ -446,12 +461,11 @@ ORDER BY LCASE(STR(?individualName))
                                     if website:
                                         st.write(f"**Website:** {website}")
                                     st.write(f"**Related to:** {fraud_activity_label}")
-                                    st.markdown("---")
                                     st.caption(f"Source: {is_defined_by_url}")
                         else:
                             st.info("No prevention & detection guidance found for this fraud activity.")
                     
-                    # Tab 3: Fraud Awareness Resources
+                    # Tab 3: Awareness Resources
                     with tab3:
                         if awareness_resources:
                             for i, row in enumerate(awareness_resources):
@@ -465,12 +479,11 @@ ORDER BY LCASE(STR(?individualName))
                                     if website:
                                         st.write(f"**Website:** {website}")
                                     st.write(f"**Related to:** {fraud_activity_label}")
-                                    st.markdown("---")
                                     st.caption(f"Source: {is_defined_by_url}")
                         else:
                             st.info("No fraud awareness resources found for this fraud activity.")
                     
-                    # Tab 4: Fraud Risk Management Principles
+                    # Tab 4: Risk Management Principles
                     with tab4:
                         if risk_mgmt_resources:
                             for i, row in enumerate(risk_mgmt_resources):
@@ -484,7 +497,6 @@ ORDER BY LCASE(STR(?individualName))
                                     if website:
                                         st.write(f"**Website:** {website}")
                                     st.write(f"**Related to:** {fraud_activity_label}")
-                                    st.markdown("---")
                                     st.caption(f"Source: {is_defined_by_url}")
                         else:
                             st.info("No fraud risk management principles found for this fraud activity.")
@@ -503,7 +515,6 @@ ORDER BY LCASE(STR(?individualName))
                                     if website:
                                         st.write(f"**Website:** {website}")
                                     st.write(f"**Related to:** {fraud_activity_label}")
-                                    st.markdown("---")
                                     st.caption(f"Source: {is_defined_by_url}")
                         else:
                             st.info("No GAO reports found for this fraud activity.")
@@ -519,7 +530,6 @@ ORDER BY LCASE(STR(?individualName))
 else:
     st.info("Please upload an ontology file to begin")
     
-    st.markdown("---")
     st.header("Getting Started")
     st.markdown("""
     **What this interface provides:**
@@ -537,10 +547,4 @@ else:
     - Upload your ontology file using the sidebar
     - Select a fraud activity type
     - Click "Search All Resources" to find all related content
-    
-    **How it works**:
-    - Dynamically loads all FraudActivity subclasses from the ontology
-    - Finds relationships through ALL object properties (involves, isExecutedBy, addresses, etc.)
-    - Captures complex OWL restrictions and property relationships
-    - Shows which properties link each scheme to the selected fraud activity
     """)
