@@ -39,7 +39,7 @@ st.markdown("""
 # Title with light yellow styling
 st.markdown("""
 <div class="dev-header">
-    <h1>🔧 DEV - US GAO Antifraud Resource Test Page</h1>
+    <h1>DEV - US GAO Antifraud Resource Test Page</h1>
     <p>Search and explore fraud concepts, instances, and relationships in the GAO's Conceptual Fraud Model</p>
 </div>
 """, unsafe_allow_html=True)
