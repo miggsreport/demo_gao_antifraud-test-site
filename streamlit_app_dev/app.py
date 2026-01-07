@@ -6,7 +6,7 @@ import os
 
 # Set page config
 st.set_page_config(
-    page_title="DEV - US GAO Antifraud Resource Test Page",
+    page_title="DEV - US GAO Antifraud Resource Search Functionality Test Page",
     layout="wide"
 )
 
@@ -77,8 +77,7 @@ st.markdown("""
 # Title with light yellow styling
 st.markdown("""
 <div class="dev-header">
-    <h1>DEV - US GAO Antifraud Resource Test Page</h1>
-    <p>Test search function of the GAO's Conceptual Fraud Model</p>
+    <h1>DEV - US GAO Antifraud Resource Search Functionality Test Page</h1>
 </div>
 """, unsafe_allow_html=True)
 
