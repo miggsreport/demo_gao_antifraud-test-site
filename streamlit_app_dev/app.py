@@ -40,7 +40,7 @@ st.markdown("""
 st.markdown("""
 <div class="dev-header">
     <h1>DEV - US GAO Antifraud Resource Test Page</h1>
-    <p>Search and explore fraud concepts, instances, and relationships in the GAO's Conceptual Fraud Model</p>
+    <p>Test search function of the GAO's Conceptual Fraud Model</p>
 </div>
 """, unsafe_allow_html=True)
 
