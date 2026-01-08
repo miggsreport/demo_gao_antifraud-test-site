@@ -6,23 +6,24 @@ import os
 
 # Set page config
 st.set_page_config(
-    page_title="DEV - US GAO Antifraud Resource Test Page",
-    layout="wide"
+    page_title="DEV GAO AFR Test",
+    layout="wide",
+    initial_sidebar_state="collapsed"
 )
 
 # Add custom CSS for styling to match AFR site
 st.markdown("""
 <style>
-    /* Header styling */
-    .header-container {
+    /* Header styling - title and badge inline */
+    .header-row {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 15px;
         margin-bottom: 10px;
     }
     .header-title {
         color: #002147;
-        font-size: 1.6rem;
+        font-size: 2rem;
         font-weight: 700;
         margin: 0;
     }
@@ -34,6 +35,7 @@ st.markdown("""
         font-weight: bold;
         font-size: 0.9rem;
         display: inline-block;
+        vertical-align: middle;
     }
     
     /* Section header styling */
@@ -86,25 +88,34 @@ st.markdown("""
     .stSuccess {
         margin-bottom: 8px;
     }
-    
-    /* Footer styling */
-    .footer-title {
-        color: #002147;
-        font-weight: 600;
-        font-size: 1rem;
-        margin-bottom: 5px;
-    }
 </style>
 """, unsafe_allow_html=True)
 
-# Header with title and DEV badge
-col_title, col_badge = st.columns([5, 1])
-with col_title:
-    st.markdown('<p class="header-title">THE GAO ANTIFRAUD RESOURCE</p>', unsafe_allow_html=True)
-with col_badge:
-    st.markdown('<span class="dev-badge">DEV</span>', unsafe_allow_html=True)
+# Header with title and DEV badge inline
+st.markdown('<div class="header-row"><span class="header-title">The GAO Antifraud Resource</span><span class="dev-badge">DEV</span></div>', unsafe_allow_html=True)
 
 st.markdown("---")
+
+# Sidebar for ontology management (collapsed by default via initial_sidebar_state)
+with st.sidebar:
+    st.header("Ontology Management")
+    
+    if 'ontology' in st.session_state and st.session_state.ontology:
+        st.success("Ontology Loaded")
+        st.markdown(f"**File:** {st.session_state.loaded_file}")
+        triple_count = len(st.session_state.ontology)
+        st.markdown(f"**Triples:** {triple_count:,}")
+        st.markdown(f"**Fraud Activities:** {len(st.session_state.fraud_activity_mapping)}")
+        
+        st.markdown("---")
+        st.markdown("**Upload Different Ontology**")
+    
+    uploaded_file = st.file_uploader(
+        "Select file", 
+        type=['owl', 'rdf', 'ttl', 'n3', 'jsonld'],
+        help="Upload an ontology file",
+        label_visibility="collapsed"
+    )
 
 # Initialize session state
 if 'ontology' not in st.session_state:
@@ -185,10 +196,24 @@ def load_default_ontology():
 if st.session_state.ontology is None:
     load_default_ontology()
 
+# Handle file upload from sidebar
+if uploaded_file is not None and uploaded_file.name != st.session_state.loaded_file:
+    temp_path = f"/tmp/{uploaded_file.name}"
+    with open(temp_path, "wb") as f:
+        f.write(uploaded_file.getbuffer())
+    
+    st.session_state.ontology = load_ontology_rdflib(temp_path)
+    st.session_state.loaded_file = uploaded_file.name
+    st.session_state.uploaded_file_path = temp_path
+    
+    if st.session_state.ontology:
+        st.session_state.fraud_activity_mapping = load_fraud_activities(st.session_state.ontology)
+        st.rerun()
+
 # Main interface
 if st.session_state.ontology:
     
-    st.markdown('<p class="section-header">Fraud Activity Search</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-header">Fraud type search</p>', unsafe_allow_html=True)
     
     fraud_activity_mapping = st.session_state.fraud_activity_mapping
     
@@ -507,56 +532,15 @@ ORDER BY LCASE(STR(?individualName))
                 st.info("Make sure your ontology file is properly loaded.")
         else:
             st.warning("Please select a fraud activity type.")
-    
-    # Footer with ontology management info
-    st.markdown("---")
-    st.markdown('<p class="footer-title">Ontology Information</p>', unsafe_allow_html=True)
-    
-    footer_col1, footer_col2, footer_col3 = st.columns(3)
-    
-    with footer_col1:
-        st.markdown("**Loaded File**")
-        st.markdown(f"{st.session_state.loaded_file}")
-    
-    with footer_col2:
-        st.markdown("**Triple Count**")
-        triple_count = len(st.session_state.ontology) if st.session_state.ontology else 0
-        st.markdown(f"{triple_count:,}")
-    
-    with footer_col3:
-        st.markdown("**Fraud Activities**")
-        st.markdown(f"{len(st.session_state.fraud_activity_mapping)}")
-    
-    # File uploader for different ontology
-    with st.expander("Upload Different Ontology"):
-        uploaded_file = st.file_uploader(
-            "Select file", 
-            type=['owl', 'rdf', 'ttl', 'n3', 'jsonld'],
-            help="Upload a different ontology file to replace the current one",
-            label_visibility="collapsed"
-        )
-        
-        if uploaded_file is not None and uploaded_file != st.session_state.loaded_file:
-            temp_path = f"/tmp/{uploaded_file.name}"
-            with open(temp_path, "wb") as f:
-                f.write(uploaded_file.getbuffer())
-            
-            st.session_state.ontology = load_ontology_rdflib(temp_path)
-            st.session_state.loaded_file = uploaded_file.name
-            st.session_state.uploaded_file_path = temp_path
-            
-            if st.session_state.ontology:
-                st.session_state.fraud_activity_mapping = load_fraud_activities(st.session_state.ontology)
-                st.rerun()
 
 else:
-    st.info("No ontology loaded. Please upload an ontology file to begin.")
+    st.info("No ontology loaded. Please upload an ontology file using the sidebar.")
     
     st.markdown('<p class="section-header">Getting Started</p>', unsafe_allow_html=True)
     st.markdown("""
     **What this interface provides:**
     
-    - **Fraud Activity Search**: Find all types of resources related to specific fraud activities
+    - **Fraud type search**: Find all types of resources related to specific fraud activities
       - Fraud Scheme Examples
       - Fraud Awareness Resources
       - Fraud Prevention & Detection Guidance
@@ -564,25 +548,6 @@ else:
       - GAO Reports
     
     **Supported formats**: OWL, RDF, TTL, N3, JSON-LD
+    
+    **To begin**: Open the sidebar (arrow at top left) and upload an ontology file.
     """)
-    
-    # File uploader when no ontology loaded
-    st.markdown("---")
-    uploaded_file = st.file_uploader(
-        "Upload Ontology File", 
-        type=['owl', 'rdf', 'ttl', 'n3', 'jsonld'],
-        help="Upload your ontology file to begin searching"
-    )
-    
-    if uploaded_file is not None:
-        temp_path = f"/tmp/{uploaded_file.name}"
-        with open(temp_path, "wb") as f:
-            f.write(uploaded_file.getbuffer())
-        
-        st.session_state.ontology = load_ontology_rdflib(temp_path)
-        st.session_state.loaded_file = uploaded_file.name
-        st.session_state.uploaded_file_path = temp_path
-        
-        if st.session_state.ontology:
-            st.session_state.fraud_activity_mapping = load_fraud_activities(st.session_state.ontology)
-            st.rerun()
