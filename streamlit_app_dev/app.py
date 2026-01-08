@@ -425,9 +425,9 @@ ORDER BY LCASE(STR(?individualName))
                     # Create tabs with counts
                     tab1, tab2, tab3, tab4, tab5 = st.tabs([
                         f"Fraud Scheme Examples ({len(fraud_schemes)})",
-                        f"Prevention & Detection ({len(prevention_resources)})",
-                        f"Awareness Resources ({len(awareness_resources)})",
-                        f"Risk Management ({len(risk_mgmt_resources)})",
+                        f"Fraud Prevention & Detection Guidance ({len(prevention_resources)})",
+                        f"Fraud Awareness Resources ({len(awareness_resources)})",
+                        f"Fraud Risk Management Principles ({len(risk_mgmt_resources)})",
                         f"GAO Reports ({len(gao_reports)})"
                     ])
                     
@@ -453,7 +453,7 @@ ORDER BY LCASE(STR(?individualName))
                         else:
                             st.info("No fraud scheme examples found for this fraud activity.")
                     
-                    # Tab 2: Prevention & Detection Guidance
+                    # Tab 2: Fraud Prevention & Detection Guidance
                     with tab2:
                         if prevention_resources:
                             for i, row in enumerate(prevention_resources):
@@ -471,7 +471,7 @@ ORDER BY LCASE(STR(?individualName))
                         else:
                             st.info("No prevention & detection guidance found for this fraud activity.")
                     
-                    # Tab 3: Awareness Resources
+                    # Tab 3: Fraud Awareness Resources
                     with tab3:
                         if awareness_resources:
                             for i, row in enumerate(awareness_resources):
@@ -489,7 +489,7 @@ ORDER BY LCASE(STR(?individualName))
                         else:
                             st.info("No fraud awareness resources found for this fraud activity.")
                     
-                    # Tab 4: Risk Management Principles
+                    # Tab 4: Fraud Risk Management Principles
                     with tab4:
                         if risk_mgmt_resources:
                             for i, row in enumerate(risk_mgmt_resources):
