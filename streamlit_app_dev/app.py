@@ -222,9 +222,9 @@ if st.session_state.ontology:
         fraud_activity_mapping = {}
     
     fraud_activity_label = st.selectbox(
-        "Select Fraud Activity Type:",
+        "What type of fraud do you want to combat?",
         options=list(fraud_activity_mapping.keys()),
-        help="Choose a fraud activity type to find all related resources"
+        help="Choose a fraud type to find all related resources"
     )
     
     fraud_activity = fraud_activity_mapping.get(fraud_activity_label)
@@ -531,7 +531,7 @@ ORDER BY LCASE(STR(?individualName))
                 st.error(f"[ERROR] SPARQL query failed: {str(e)}")
                 st.info("Make sure your ontology file is properly loaded.")
         else:
-            st.warning("Please select a fraud activity type.")
+            st.warning("Please select a fraud type.")
 
 else:
     st.info("No ontology loaded. Please upload an ontology file using the sidebar.")
