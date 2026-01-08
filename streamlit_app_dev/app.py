@@ -6,40 +6,45 @@ import os
 
 # Set page config
 st.set_page_config(
-    page_title="DEV - GAO Antifraud Resource Search Functionality Test Page",
+    page_title="DEV - US GAO Antifraud Resource Test Page",
     layout="wide"
 )
 
-# Add custom CSS for styling
+# Add custom CSS for styling to match AFR site
 st.markdown("""
 <style>
-    /* Light yellow background for the header area */
-    .dev-header {
-        background-color: #FFFACD;
-        padding: 10px 15px;
-        border-radius: 8px;
-        margin-bottom: 15px;
-        border: 2px solid #FFD700;
-    }
-    .dev-header h1 {
-        color: #333;
-        margin: 0;
-        font-size: 1.8rem;
-    }
-    .dev-header p {
-        color: #555;
-        margin: 3px 0 0 0;
-        font-size: 0.95rem;
-    }
-    
-    /* Smaller section header */
-    .section-header {
-        font-size: 1.4rem;
-        font-weight: 600;
+    /* Header styling */
+    .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         margin-bottom: 10px;
     }
+    .header-title {
+        color: #002147;
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin: 0;
+    }
+    .dev-badge {
+        background-color: #FFD700;
+        color: #002147;
+        padding: 6px 14px;
+        border-radius: 4px;
+        font-weight: bold;
+        font-size: 0.9rem;
+        display: inline-block;
+    }
     
-    /* Tab styling - larger font and borders */
+    /* Section header styling */
+    .section-header {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #002147;
+        margin-bottom: 8px;
+    }
+    
+    /* Tab styling - blue theme with borders */
     .stTabs [data-baseweb="tab-list"] {
         gap: 4px;
         margin-top: 5px;
@@ -54,32 +59,52 @@ st.markdown("""
     }
     .stTabs [data-baseweb="tab"]:hover {
         background-color: #e8e8e8;
-        border-color: #999;
+        border-color: #002147;
     }
     .stTabs [aria-selected="true"] {
         background-color: #fff;
-        border-color: #4CAF50;
+        border-color: #002147;
         border-bottom-color: #fff;
+        color: #002147;
     }
     
-    /* Reduce spacing around success message */
+    /* Button styling to match AFR */
+    .stButton > button {
+        background-color: #3d6a99;
+        color: white;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 4px;
+        font-weight: 500;
+    }
+    .stButton > button:hover {
+        background-color: #002147;
+        color: white;
+    }
+    
+    /* Success message styling */
     .stSuccess {
         margin-bottom: 8px;
     }
     
-    /* Uniform spacing for expanders */
-    .streamlit-expanderHeader {
+    /* Footer styling */
+    .footer-title {
+        color: #002147;
+        font-weight: 600;
         font-size: 1rem;
+        margin-bottom: 5px;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Title with light yellow styling
-st.markdown("""
-<div class="dev-header">
-    <h1>DEV - GAO Antifraud Resource Search Functionality Test Page</h1>
-</div>
-""", unsafe_allow_html=True)
+# Header with title and DEV badge
+col_title, col_badge = st.columns([5, 1])
+with col_title:
+    st.markdown('<p class="header-title">THE GAO ANTIFRAUD RESOURCE</p>', unsafe_allow_html=True)
+with col_badge:
+    st.markdown('<span class="dev-badge">DEV</span>', unsafe_allow_html=True)
+
+st.markdown("---")
 
 # Initialize session state
 if 'ontology' not in st.session_state:
@@ -163,7 +188,7 @@ if st.session_state.ontology is None:
 # Main interface
 if st.session_state.ontology:
     
-    st.markdown('<p class="section-header">Fraud type</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-header">Fraud Activity Search</p>', unsafe_allow_html=True)
     
     fraud_activity_mapping = st.session_state.fraud_activity_mapping
     
@@ -172,7 +197,7 @@ if st.session_state.ontology:
         fraud_activity_mapping = {}
     
     fraud_activity_label = st.selectbox(
-        "What type of fraud do you want to combat?",
+        "Select Fraud Activity Type:",
         options=list(fraud_activity_mapping.keys()),
         help="Choose a fraud activity type to find all related resources"
     )
@@ -483,18 +508,32 @@ ORDER BY LCASE(STR(?individualName))
         else:
             st.warning("Please select a fraud activity type.")
     
-    # Ontology Management at bottom of page
+    # Footer with ontology management info
     st.markdown("---")
-    with st.expander("Ontology Management", expanded=False):
-        if st.session_state.ontology:
-            triple_count = len(st.session_state.ontology)
-            st.success(f"Loaded: {st.session_state.loaded_file} ({triple_count} triples)")
-            st.info(f"Fraud Activities: {len(st.session_state.fraud_activity_mapping)}")
-        
+    st.markdown('<p class="footer-title">Ontology Information</p>', unsafe_allow_html=True)
+    
+    footer_col1, footer_col2, footer_col3 = st.columns(3)
+    
+    with footer_col1:
+        st.markdown("**Loaded File**")
+        st.markdown(f"{st.session_state.loaded_file}")
+    
+    with footer_col2:
+        st.markdown("**Triple Count**")
+        triple_count = len(st.session_state.ontology) if st.session_state.ontology else 0
+        st.markdown(f"{triple_count:,}")
+    
+    with footer_col3:
+        st.markdown("**Fraud Activities**")
+        st.markdown(f"{len(st.session_state.fraud_activity_mapping)}")
+    
+    # File uploader for different ontology
+    with st.expander("Upload Different Ontology"):
         uploaded_file = st.file_uploader(
-            "Upload a different ontology file", 
+            "Select file", 
             type=['owl', 'rdf', 'ttl', 'n3', 'jsonld'],
-            help="Upload your ontology file to replace the current one"
+            help="Upload a different ontology file to replace the current one",
+            label_visibility="collapsed"
         )
         
         if uploaded_file is not None and uploaded_file != st.session_state.loaded_file:
@@ -503,7 +542,7 @@ ORDER BY LCASE(STR(?individualName))
                 f.write(uploaded_file.getbuffer())
             
             st.session_state.ontology = load_ontology_rdflib(temp_path)
-            st.session_state.loaded_file = uploaded_file
+            st.session_state.loaded_file = uploaded_file.name
             st.session_state.uploaded_file_path = temp_path
             
             if st.session_state.ontology:
@@ -511,18 +550,18 @@ ORDER BY LCASE(STR(?individualName))
                 st.rerun()
 
 else:
-    st.info("Please upload an ontology file to begin")
+    st.info("No ontology loaded. Please upload an ontology file to begin.")
     
-    st.header("Getting Started")
+    st.markdown('<p class="section-header">Getting Started</p>', unsafe_allow_html=True)
     st.markdown("""
     **What this interface provides:**
     
-    1. **Fraud type**: Find all types of resources related to specific fraud activities
-       - Fraud Scheme Examples
-       - Fraud Awareness Resources
-       - Fraud Prevention & Detection Guidance
-       - Fraud Risk Management Principles
-       - GAO Reports
+    - **Fraud Activity Search**: Find all types of resources related to specific fraud activities
+      - Fraud Scheme Examples
+      - Fraud Awareness Resources
+      - Fraud Prevention & Detection Guidance
+      - Fraud Risk Management Principles
+      - GAO Reports
     
     **Supported formats**: OWL, RDF, TTL, N3, JSON-LD
     """)
@@ -541,7 +580,7 @@ else:
             f.write(uploaded_file.getbuffer())
         
         st.session_state.ontology = load_ontology_rdflib(temp_path)
-        st.session_state.loaded_file = uploaded_file
+        st.session_state.loaded_file = uploaded_file.name
         st.session_state.uploaded_file_path = temp_path
         
         if st.session_state.ontology:
