@@ -96,6 +96,19 @@ st.markdown('<div class="header-row"><span class="header-title">The GAO Antifrau
 
 st.markdown("---")
 
+# =============================================================================
+# TAB CONFIGURATION
+# Ordered list of (class_local_name, display_label) tuples
+# For AuditProduct, we use rdfs:subClassOf* to include subclasses
+# =============================================================================
+TAB_CONFIG = [
+    ("FederalFraudScheme", "Fraud Scheme Examples"),
+    ("FraudEducation", "Fraud Awareness Resources"),
+    ("FraudDetection", "Fraud Prevention & Detection Guidance"),
+    ("FraudRiskManagementPrinciples", "Fraud Risk Mgmt Principles"),
+    ("AuditProduct", "GAO Reports"),
+]
+
 # Sidebar for ontology management (collapsed by default via initial_sidebar_state)
 with st.sidebar:
     st.header("Ontology Management")
@@ -175,6 +188,157 @@ WHERE {
         st.error(f"Error loading fraud activities: {str(e)}")
         return {}
 
+
+def query_fraud_schemes(ontology_graph, fraud_activity):
+    """
+    Query for FederalFraudScheme instances related to a specific FraudActivity.
+    This is the existing working query - unchanged.
+    """
+    query = f"""
+PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?individual ?individualName ?description ?fraudNarrative ?isDefinedBy ?objectPropertyName
+WHERE {{
+    ?individual a gfo:FederalFraudScheme ;
+                rdfs:label ?individualName .
+    
+    OPTIONAL {{ ?individual dc:description ?description . }}
+    OPTIONAL {{ ?individual gfo:fraudNarrative ?fraudNarrative . }}
+    OPTIONAL {{ ?individual rdfs:isDefinedBy ?isDefinedBy . }}
+    
+    ?individual a ?restrictionClass .
+    ?restrictionClass owl:onProperty ?objectProperty ;
+                      owl:someValuesFrom ?relatedClass .
+    
+    ?relatedClass rdfs:subClassOf* gfo:{fraud_activity} .
+    
+    BIND(REPLACE(STR(?objectProperty), "^.*/", "") AS ?objectPropertyName)
+}}
+"""
+    return list(ontology_graph.query(query))
+
+
+def query_resource_instances(ontology_graph, resource_class, fraud_activity):
+    """
+    Dynamically query for instances of a resource class that address a specific FraudActivity.
+    Uses rdfs:subClassOf* to include instances of subclasses (e.g., for AuditProduct).
+    
+    Parameters:
+    - resource_class: The local name of the resource class (e.g., "FraudEducation", "AuditProduct")
+    - fraud_activity: The local name of the FraudActivity to filter by
+    
+    Returns list of query results with individual details.
+    """
+    query = f"""
+PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT DISTINCT ?individual ?individualName ?definition ?website ?isDefinedBy
+WHERE {{
+    # Find instances that are of this class or any subclass
+    ?individual a ?instanceClass .
+    ?instanceClass rdfs:subClassOf* gfo:{resource_class} .
+    
+    ?individual rdfs:label ?individualName .
+    
+    OPTIONAL {{ ?individual skos:definition ?definition . }}
+    OPTIONAL {{ ?individual gfo:hasWebsite ?website . }}
+    OPTIONAL {{ ?individual rdfs:isDefinedBy ?isDefinedBy . }}
+    
+    # Filter by FraudActivity relationship via addresses property
+    {{
+        # Method 1: Instance has explicit restriction class with addresses property
+        ?individual a ?someClass .
+        ?someClass owl:onProperty gfo:addresses ;
+                   owl:someValuesFrom ?specificFraud .
+        
+        ?specificFraud rdfs:subClassOf* gfo:{fraud_activity} .
+    }}
+    UNION
+    {{
+        # Method 2: Instance's class is a subclass of the FraudActivity
+        ?individual a ?resourceSubClass .
+        ?resourceSubClass rdfs:subClassOf* gfo:{fraud_activity} .
+        
+        FILTER(?resourceSubClass != gfo:{resource_class})
+    }}
+}}
+ORDER BY LCASE(STR(?individualName))
+"""
+    return list(ontology_graph.query(query))
+
+
+def process_fraud_scheme_results(results):
+    """
+    Process and deduplicate fraud scheme query results.
+    Returns a sorted list of deduplicated scheme dictionaries.
+    """
+    seen_individuals = {}
+    for row in results:
+        individual_uri = str(row.individual)
+        property_name = str(row.objectPropertyName) if row.objectPropertyName else "unknown"
+        
+        if individual_uri not in seen_individuals:
+            seen_individuals[individual_uri] = {
+                'individual': row.individual,
+                'individualName': str(row.individualName),
+                'description': str(row.description) if row.description else None,
+                'fraudNarrative': str(row.fraudNarrative) if row.fraudNarrative else None,
+                'isDefinedBy': str(row.isDefinedBy) if row.isDefinedBy else None,
+                'objectProperties': set()
+            }
+        seen_individuals[individual_uri]['objectProperties'].add(property_name)
+    
+    return sorted(seen_individuals.values(), key=lambda x: x['individualName'].lower())
+
+
+def display_fraud_schemes(schemes, fraud_activity_label):
+    """Display fraud scheme results in expanders."""
+    if schemes:
+        for i, result in enumerate(schemes):
+            scheme_name = result['individualName']
+            fraud_description = result['description'] if result['description'] else "No description available"
+            fraud_narrative = result['fraudNarrative'] if result['fraudNarrative'] else "No fraud narrative available"
+            is_defined_by_url = result['isDefinedBy'] if result['isDefinedBy'] else "No definition source available"
+            
+            properties_list = sorted(result['objectProperties'])
+            properties_display = ", ".join(properties_list)
+            
+            with st.expander(f"{i+1}. {scheme_name}"):
+                st.write(f"**Fraud Description:** {fraud_description}")
+                st.write("**Fraud Narrative:**")
+                st.text(fraud_narrative)
+                st.write(f"**Related to:** {fraud_activity_label}")
+                st.write(f"**Linked via:** {properties_display}")
+                st.caption(f"Source: {is_defined_by_url}")
+    else:
+        st.info("No fraud scheme examples found for this fraud activity.")
+
+
+def display_resource_results(results, fraud_activity_label, empty_message):
+    """Display resource query results in expanders."""
+    if results:
+        for i, row in enumerate(results):
+            resource_name = str(row.individualName)
+            definition = str(row.definition) if row.definition else "No definition available"
+            website = str(row.website) if row.website else ""
+            is_defined_by_url = str(row.isDefinedBy) if row.isDefinedBy else "No definition source available"
+            
+            with st.expander(f"{i+1}. {resource_name}"):
+                st.write(f"**Definition:** {definition}")
+                if website:
+                    st.write(f"**Website:** {website}")
+                st.write(f"**Related to:** {fraud_activity_label}")
+                st.caption(f"Source: {is_defined_by_url}")
+    else:
+        st.info(empty_message)
+
+
 def load_default_ontology():
     script_dir = Path(__file__).parent
     default_ontology_path = script_dir / "gfo_turtle.ttl"
@@ -232,298 +396,50 @@ if st.session_state.ontology:
     if st.button("Search All Resources"):
         if fraud_activity_label and fraud_activity:
             
-            fraud_scheme_query = f"""
-PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX dc: <http://purl.org/dc/elements/1.1/>
-
-SELECT ?individual ?individualName ?description ?fraudNarrative ?isDefinedBy ?objectPropertyName
-WHERE {{
-    ?individual a gfo:FederalFraudScheme ;
-                rdfs:label ?individualName .
-    
-    OPTIONAL {{ ?individual dc:description ?description . }}
-    OPTIONAL {{ ?individual gfo:fraudNarrative ?fraudNarrative . }}
-    OPTIONAL {{ ?individual rdfs:isDefinedBy ?isDefinedBy . }}
-    
-    ?individual a ?restrictionClass .
-    ?restrictionClass owl:onProperty ?objectProperty ;
-                      owl:someValuesFrom ?relatedClass .
-    
-    ?relatedClass rdfs:subClassOf* gfo:{fraud_activity} .
-    
-    BIND(REPLACE(STR(?objectProperty), "^.*/", "") AS ?objectPropertyName)
-}}
-"""
-
-            awareness_query = f"""
-PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-SELECT DISTINCT ?individual ?individualName ?definition ?website ?isDefinedBy
-WHERE {{
-    ?individual a gfo:FraudEducation ;
-                rdfs:label ?individualName .
-    
-    OPTIONAL {{ ?individual skos:definition ?definition . }}
-    OPTIONAL {{ ?individual gfo:hasWebsite ?website . }}
-    OPTIONAL {{ ?individual rdfs:isDefinedBy ?isDefinedBy . }}
-    
-    {{
-        ?individual a ?someClass .
-        ?someClass owl:onProperty gfo:addresses ;
-                   owl:someValuesFrom ?specificFraud .
-        
-        ?specificFraud rdfs:subClassOf* gfo:{fraud_activity} .
-    }}
-    UNION
-    {{
-        ?individual a ?resourceClass .
-        ?resourceClass rdfs:subClassOf* gfo:{fraud_activity} .
-        
-        FILTER(?resourceClass != gfo:FraudEducation)
-    }}
-}}
-ORDER BY LCASE(STR(?individualName))
-"""
-
-            prevention_query = f"""
-PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-SELECT DISTINCT ?individual ?individualName ?definition ?website ?isDefinedBy
-WHERE {{
-    ?individual a gfo:FraudPreventionAndDetectionGuidance ;
-                rdfs:label ?individualName .
-    
-    OPTIONAL {{ ?individual skos:definition ?definition . }}
-    OPTIONAL {{ ?individual gfo:hasWebsite ?website . }}
-    OPTIONAL {{ ?individual rdfs:isDefinedBy ?isDefinedBy . }}
-    
-    {{
-        ?individual a ?someClass .
-        ?someClass owl:onProperty gfo:addresses ;
-                   owl:someValuesFrom ?specificFraud .
-        
-        ?specificFraud rdfs:subClassOf* gfo:{fraud_activity} .
-    }}
-    UNION
-    {{
-        ?individual a ?resourceClass .
-        ?resourceClass rdfs:subClassOf* gfo:{fraud_activity} .
-        
-        FILTER(?resourceClass != gfo:FraudPreventionAndDetectionGuidance)
-    }}
-}}
-ORDER BY LCASE(STR(?individualName))
-"""
-
-            risk_mgmt_query = f"""
-PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-SELECT DISTINCT ?individual ?individualName ?definition ?website ?isDefinedBy
-WHERE {{
-    ?individual a gfo:FraudRiskManagementPrinciples ;
-                rdfs:label ?individualName .
-    
-    OPTIONAL {{ ?individual skos:definition ?definition . }}
-    OPTIONAL {{ ?individual gfo:hasWebsite ?website . }}
-    OPTIONAL {{ ?individual rdfs:isDefinedBy ?isDefinedBy . }}
-    
-    {{
-        ?individual a ?someClass .
-        ?someClass owl:onProperty gfo:addresses ;
-                   owl:someValuesFrom ?specificFraud .
-        
-        ?specificFraud rdfs:subClassOf* gfo:{fraud_activity} .
-    }}
-    UNION
-    {{
-        ?individual a ?resourceClass .
-        ?resourceClass rdfs:subClassOf* gfo:{fraud_activity} .
-        
-        FILTER(?resourceClass != gfo:FraudRiskManagementPrinciples)
-    }}
-}}
-ORDER BY LCASE(STR(?individualName))
-"""
-
-            gao_report_query = f"""
-PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-SELECT DISTINCT ?individual ?individualName ?definition ?website ?isDefinedBy
-WHERE {{
-    ?individual a gfo:GAOReport ;
-                rdfs:label ?individualName .
-    
-    OPTIONAL {{ ?individual skos:definition ?definition . }}
-    OPTIONAL {{ ?individual gfo:hasWebsite ?website . }}
-    OPTIONAL {{ ?individual rdfs:isDefinedBy ?isDefinedBy . }}
-    
-    {{
-        ?individual a ?someClass .
-        ?someClass owl:onProperty gfo:addresses ;
-                   owl:someValuesFrom ?specificFraud .
-        
-        ?specificFraud rdfs:subClassOf* gfo:{fraud_activity} .
-    }}
-    UNION
-    {{
-        ?individual a ?resourceClass .
-        ?resourceClass rdfs:subClassOf* gfo:{fraud_activity} .
-        
-        FILTER(?resourceClass != gfo:GAOReport)
-    }}
-}}
-ORDER BY LCASE(STR(?individualName))
-"""
-            
+            # Execute all queries
             try:
-                fraud_scheme_results = list(st.session_state.ontology.query(fraud_scheme_query))
-                awareness_resources = list(st.session_state.ontology.query(awareness_query))
-                prevention_resources = list(st.session_state.ontology.query(prevention_query))
-                risk_mgmt_resources = list(st.session_state.ontology.query(risk_mgmt_query))
-                gao_reports = list(st.session_state.ontology.query(gao_report_query))
+                # Query for FederalFraudScheme (existing working query)
+                fraud_scheme_results = query_fraud_schemes(st.session_state.ontology, fraud_activity)
+                fraud_schemes = process_fraud_scheme_results(fraud_scheme_results)
                 
-                # Deduplicate fraud schemes
-                seen_individuals = {}
-                for row in fraud_scheme_results:
-                    individual_uri = str(row.individual)
-                    property_name = str(row.objectPropertyName) if row.objectPropertyName else "unknown"
-                    
-                    if individual_uri not in seen_individuals:
-                        seen_individuals[individual_uri] = {
-                            'individual': row.individual,
-                            'individualName': str(row.individualName),
-                            'description': str(row.description) if row.description else None,
-                            'fraudNarrative': str(row.fraudNarrative) if row.fraudNarrative else None,
-                            'isDefinedBy': str(row.isDefinedBy) if row.isDefinedBy else None,
-                            'objectProperties': set()
-                        }
-                    seen_individuals[individual_uri]['objectProperties'].add(property_name)
+                # Query for each resource class dynamically
+                resource_results = {}
+                for class_name, display_label in TAB_CONFIG[1:]:  # Skip FederalFraudScheme
+                    resource_results[class_name] = query_resource_instances(
+                        st.session_state.ontology, 
+                        class_name, 
+                        fraud_activity
+                    )
                 
-                fraud_schemes = sorted(seen_individuals.values(), key=lambda x: x['individualName'].lower())
-                
-                total_results = (len(fraud_schemes) + len(awareness_resources) + 
-                               len(prevention_resources) + len(risk_mgmt_resources) + 
-                               len(gao_reports))
+                # Calculate total results
+                total_results = len(fraud_schemes) + sum(len(r) for r in resource_results.values())
                 
                 if total_results > 0:
                     st.success(f"Found {total_results} total resources related to {fraud_activity_label}")
                     
-                    # Create tabs with counts
-                    tab1, tab2, tab3, tab4, tab5 = st.tabs([
-                        f"Fraud Scheme Examples ({len(fraud_schemes)})",
-                        f"Fraud Prevention & Detection Guidance ({len(prevention_resources)})",
-                        f"Fraud Awareness Resources ({len(awareness_resources)})",
-                        f"Fraud Risk Management Principles ({len(risk_mgmt_resources)})",
-                        f"GAO Reports ({len(gao_reports)})"
-                    ])
+                    # Create tabs with counts in the configured order
+                    tab_labels = [
+                        f"{TAB_CONFIG[0][1]} ({len(fraud_schemes)})",  # Fraud Scheme Examples
+                    ]
+                    for class_name, display_label in TAB_CONFIG[1:]:
+                        count = len(resource_results[class_name])
+                        tab_labels.append(f"{display_label} ({count})")
+                    
+                    tabs = st.tabs(tab_labels)
                     
                     # Tab 1: Fraud Scheme Examples
-                    with tab1:
-                        if fraud_schemes:
-                            for i, result in enumerate(fraud_schemes):
-                                scheme_name = result['individualName']
-                                fraud_description = result['description'] if result['description'] else "No description available"
-                                fraud_narrative_uri = result['fraudNarrative'] if result['fraudNarrative'] else "No fraud narrative available"
-                                is_defined_by_url = result['isDefinedBy'] if result['isDefinedBy'] else "No definition source available"
-                                
-                                properties_list = sorted(result['objectProperties'])
-                                properties_display = ", ".join(properties_list)
-                                
-                                with st.expander(f"{i+1}. {scheme_name}"):
-                                    st.write(f"**Fraud Description:** {fraud_description}")
-                                    st.write("**Fraud Narrative:**")
-                                    st.text(fraud_narrative_uri)
-                                    st.write(f"**Related to:** {fraud_activity_label}")
-                                    st.write(f"**Linked via:** {properties_display}")
-                                    st.caption(f"Source: {is_defined_by_url}")
-                        else:
-                            st.info("No fraud scheme examples found for this fraud activity.")
+                    with tabs[0]:
+                        display_fraud_schemes(fraud_schemes, fraud_activity_label)
                     
-                    # Tab 2: Fraud Prevention & Detection Guidance
-                    with tab2:
-                        if prevention_resources:
-                            for i, row in enumerate(prevention_resources):
-                                resource_name = str(row.individualName)
-                                definition = str(row.definition) if row.definition else "No definition available"
-                                website = str(row.website) if row.website else ""
-                                is_defined_by_url = str(row.isDefinedBy) if row.isDefinedBy else "No definition source available"
-                                
-                                with st.expander(f"{i+1}. {resource_name}"):
-                                    st.write(f"**Definition:** {definition}")
-                                    if website:
-                                        st.write(f"**Website:** {website}")
-                                    st.write(f"**Related to:** {fraud_activity_label}")
-                                    st.caption(f"Source: {is_defined_by_url}")
-                        else:
-                            st.info("No prevention & detection guidance found for this fraud activity.")
-                    
-                    # Tab 3: Fraud Awareness Resources
-                    with tab3:
-                        if awareness_resources:
-                            for i, row in enumerate(awareness_resources):
-                                resource_name = str(row.individualName)
-                                definition = str(row.definition) if row.definition else "No definition available"
-                                website = str(row.website) if row.website else ""
-                                is_defined_by_url = str(row.isDefinedBy) if row.isDefinedBy else "No definition source available"
-                                
-                                with st.expander(f"{i+1}. {resource_name}"):
-                                    st.write(f"**Definition:** {definition}")
-                                    if website:
-                                        st.write(f"**Website:** {website}")
-                                    st.write(f"**Related to:** {fraud_activity_label}")
-                                    st.caption(f"Source: {is_defined_by_url}")
-                        else:
-                            st.info("No fraud awareness resources found for this fraud activity.")
-                    
-                    # Tab 4: Fraud Risk Management Principles
-                    with tab4:
-                        if risk_mgmt_resources:
-                            for i, row in enumerate(risk_mgmt_resources):
-                                resource_name = str(row.individualName)
-                                definition = str(row.definition) if row.definition else "No definition available"
-                                website = str(row.website) if row.website else ""
-                                is_defined_by_url = str(row.isDefinedBy) if row.isDefinedBy else "No definition source available"
-                                
-                                with st.expander(f"{i+1}. {resource_name}"):
-                                    st.write(f"**Definition:** {definition}")
-                                    if website:
-                                        st.write(f"**Website:** {website}")
-                                    st.write(f"**Related to:** {fraud_activity_label}")
-                                    st.caption(f"Source: {is_defined_by_url}")
-                        else:
-                            st.info("No fraud risk management principles found for this fraud activity.")
-                    
-                    # Tab 5: GAO Reports
-                    with tab5:
-                        if gao_reports:
-                            for i, row in enumerate(gao_reports):
-                                resource_name = str(row.individualName)
-                                definition = str(row.definition) if row.definition else "No definition available"
-                                website = str(row.website) if row.website else ""
-                                is_defined_by_url = str(row.isDefinedBy) if row.isDefinedBy else "No definition source available"
-                                
-                                with st.expander(f"{i+1}. {resource_name}"):
-                                    st.write(f"**Definition:** {definition}")
-                                    if website:
-                                        st.write(f"**Website:** {website}")
-                                    st.write(f"**Related to:** {fraud_activity_label}")
-                                    st.caption(f"Source: {is_defined_by_url}")
-                        else:
-                            st.info("No GAO reports found for this fraud activity.")
+                    # Remaining tabs: Resource classes
+                    for i, (class_name, display_label) in enumerate(TAB_CONFIG[1:], start=1):
+                        with tabs[i]:
+                            empty_msg = f"No {display_label.lower()} found for this fraud activity."
+                            display_resource_results(
+                                resource_results[class_name], 
+                                fraud_activity_label,
+                                empty_msg
+                            )
                 else:
                     st.info(f"No resources found for {fraud_activity_label}")
                     
@@ -544,7 +460,7 @@ else:
       - Fraud Scheme Examples
       - Fraud Awareness Resources
       - Fraud Prevention & Detection Guidance
-      - Fraud Risk Management Principles
+      - Fraud Risk Mgmt Principles
       - GAO Reports
     
     **Supported formats**: OWL, RDF, TTL, N3, JSON-LD
