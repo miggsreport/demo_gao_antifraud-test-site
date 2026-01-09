@@ -223,7 +223,7 @@ WHERE {{
 
 def query_resource_instances(ontology_graph, resource_class, fraud_activity):
     """
-    Dynamically query for instances of a resource class that address a specific FraudActivity.
+    Dynamically query for instances of a resource class related to a specific FraudActivity.
     Uses rdfs:subClassOf* to include instances of subclasses (e.g., for AuditProduct).
     
     Parameters:
@@ -231,6 +231,9 @@ def query_resource_instances(ontology_graph, resource_class, fraud_activity):
     - fraud_activity: The local name of the FraudActivity to filter by
     
     Returns list of query results with individual details.
+    
+    Note: The query is property-agnostic - it matches ANY owl:someValuesFrom restriction
+    pointing to the FraudActivity, regardless of property (addresses, mentions, involves, etc.)
     """
     query = f"""
 PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
@@ -250,12 +253,12 @@ WHERE {{
     OPTIONAL {{ ?individual gfo:hasWebsite ?website . }}
     OPTIONAL {{ ?individual rdfs:isDefinedBy ?isDefinedBy . }}
     
-    # Filter by FraudActivity relationship via addresses property
+    # Filter by FraudActivity relationship (property-agnostic)
     {{
-        # Method 1: Instance has explicit restriction class with addresses property
+        # Method 1: Instance has explicit restriction class with ANY property
+        # pointing to the FraudActivity (addresses, mentions, involves, etc.)
         ?individual a ?someClass .
-        ?someClass owl:onProperty gfo:addresses ;
-                   owl:someValuesFrom ?specificFraud .
+        ?someClass owl:someValuesFrom ?specificFraud .
         
         ?specificFraud rdfs:subClassOf* gfo:{fraud_activity} .
     }}
