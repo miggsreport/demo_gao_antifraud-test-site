@@ -92,7 +92,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Header with title and TEST badge inline
-st.markdown('<div class="header-row"><span class="header-title">The GAO Antifraud Resource</span><span class="test-badge">TEST SITE</span></div>', unsafe_allow_html=True)
+st.markdown('<div class="header-row"><span class="header-title">The GAO Antifraud Resource</span><span class="test-badge">DEMO TEST SITE</span></div>', unsafe_allow_html=True)
 
 st.markdown("---")
 
