@@ -27,7 +27,7 @@ st.markdown("""
         font-weight: 700;
         margin: 0;
     }
-    .dev-badge {
+    .test-badge {
         background-color: #FFD700;
         color: #002147;
         padding: 6px 14px;
