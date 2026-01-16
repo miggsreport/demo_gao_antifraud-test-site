@@ -6,7 +6,7 @@ import os
 
 # Set page config
 st.set_page_config(
-    page_title="DEV GAO AFR Test",
+    page_title="Demo AFR Test Site",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -91,8 +91,8 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Header with title and DEV badge inline
-st.markdown('<div class="header-row"><span class="header-title">The GAO Antifraud Resource</span><span class="dev-badge">TEST SITE</span></div>', unsafe_allow_html=True)
+# Header with title and TEST badge inline
+st.markdown('<div class="header-row"><span class="header-title">The GAO Antifraud Resource</span><span class="test-badge">TEST SITE</span></div>', unsafe_allow_html=True)
 
 st.markdown("---")
 
