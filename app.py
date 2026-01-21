@@ -103,6 +103,15 @@ st.markdown("""
     .stSuccess {
         margin-bottom: 8px;
     }
+    
+    /* Note styling for comparison section */
+    .comparison-note {
+        font-size: 0.65rem;
+        font-style: italic;
+        color: #888;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -1017,6 +1026,8 @@ if st.session_state.ontology:
         
         # Display comparison results if available
         if 'comparison_dfs' in st.session_state and st.session_state.comparison_dfs:
+            st.markdown('<p class="comparison-note">&lt;Oversight.gov&gt; and &lt;Oversight.gov_State_and_Local&gt; always appear in the Fraud awareness resources results on the AFR Site. This cannot be replicated in the Streamlit site results, and warrants further investigation.</p>', unsafe_allow_html=True)
+            
             st.markdown('<p class="section-header">Search Results Comparison: Summary</p>', unsafe_allow_html=True)
             
             st.dataframe(st.session_state.comparison_summary, use_container_width=True, hide_index=True)
