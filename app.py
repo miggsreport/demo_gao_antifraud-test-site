@@ -249,7 +249,11 @@ def load_default_ontology():
 # DEMO APP QUERIES (Current implementation - owl:someValuesFrom approach)
 # =============================================================================
 def query_fraud_schemes(ontology_graph, fraud_activity):
-    """Query for FederalFraudScheme instances related to a specific FraudActivity."""
+    """
+    Query for FederalFraudScheme instances related to a specific FraudActivity.
+    UNION future-proofs against different modeling patterns:
+    Path 1: owl:someValuesFrom restrictions | Path 2: direct subclass typing
+    """
     query = f"""
 PREFIX gfo: <https://gaoinnovations.gov/antifraud_resource/howfraudworks/gfo/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -265,13 +269,20 @@ WHERE {{
     OPTIONAL {{ ?individual gfo:fraudNarrative ?fraudNarrative . }}
     OPTIONAL {{ ?individual rdfs:isDefinedBy ?isDefinedBy . }}
     
-    ?individual a ?restrictionClass .
-    ?restrictionClass owl:onProperty ?objectProperty ;
-                      owl:someValuesFrom ?relatedClass .
-    
-    ?relatedClass rdfs:subClassOf* gfo:{fraud_activity} .
-    
-    BIND(REPLACE(STR(?objectProperty), "^.*/", "") AS ?objectPropertyName)
+    {{
+        ?individual a ?restrictionClass .
+        ?restrictionClass owl:onProperty ?objectProperty ;
+                          owl:someValuesFrom ?relatedClass .
+        ?relatedClass rdfs:subClassOf* gfo:{fraud_activity} .
+        BIND(REPLACE(STR(?objectProperty), "^.*/", "") AS ?objectPropertyName)
+    }}
+    UNION
+    {{
+        ?individual a ?schemeSubClass .
+        ?schemeSubClass rdfs:subClassOf* gfo:{fraud_activity} .
+        FILTER(?schemeSubClass != gfo:FederalFraudScheme)
+        BIND("directSubclass" AS ?objectPropertyName)
+    }}
 }}
 """
     return list(ontology_graph.query(query))
